@@ -1,5 +1,6 @@
 package com.system.ophtalmological.System.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,58 @@ public class DepartmentService {
 		}
 		return dto;
 	}
+
+	public List<DepartmentDto> getAll() {
+		List<Department> departments = repository.findAll();
+		List<DepartmentDto> getDto = dataDepartmen.getAll(departments);
+		return getDto;
+	}
+
+	public DepartmentDto update(DepartmentSave data) {
+		DepartmentDto dto = null;
+		Department transform = dataDepartmen.departmentData(data);
+		Optional<Department> repositoryData = repository.findById(transform.getId());
+		if(repositoryData.isPresent()) {
+			Department save = repository.save(transform);
+			dto = new DepartmentDto(save);
+		}else {
+			throw new BusinessExceptio("This department not exist");
+		}
+		
+		return dto;
+	}
+	
+	public DepartmentDto getByname(DepartmentSave data) {
+		DepartmentDto dto = null;
+		Department transform = dataDepartmen.departmentData(data);
+		Optional<Department> repositoryData = repository.findByName(transform.getName());
+		if(repositoryData.isPresent()) {			
+			dto = new DepartmentDto(
+					repositoryData.get().getId(),
+					repositoryData.get().getName(),
+					repositoryData.get().getClerk()
+			);
+		}else {
+			throw new BusinessExceptio("This department not exist");
+		}
+		System.out.print(dto);
+		return dto;
+	}
+
+	public DepartmentDto delete(DepartmentSave data) {
+		DepartmentDto dto = null;
+		Department transform = dataDepartmen.departmentData(data);
+		Optional<Department> repositoryData = repository.findById(transform.getId());
+		if(repositoryData.isPresent()) {			
+			repository.delete(transform);
+		}else {
+			throw new BusinessExceptio("This department not exist");
+		}
+		return null;
+	}
+	
+	
+	
+	
 
 }

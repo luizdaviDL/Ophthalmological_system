@@ -85,15 +85,6 @@ public class Appointmentservice {
 		return result;
 	}
 
-	/*public AppointmentDtoDoctor delete(AppointmentSave data) {
-		Appointment value = dataClass.dataClass(data);
-		Optional<Appointment> appointment = repository.findById(value.getId());
-		if(appointment.isPresent()) {
-			repository.delete(value);
-		}
-		return null;
-	}*/
-
 	public AppointmentDtoDoctor delete(Long id) {
 		Optional<Appointment> appointment = repository.findById(id);
 		
