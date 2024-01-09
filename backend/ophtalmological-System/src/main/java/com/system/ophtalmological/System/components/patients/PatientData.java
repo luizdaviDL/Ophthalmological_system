@@ -24,11 +24,6 @@ public class PatientData {
 		return mapper.map(pa, Patient.class);
 	}
 	
-	//transform saveDto to class
-	/*public Patient patientUp(PaUpdate pa) {
-		return mapper.map(pa, Patient.class);
-	}*/
-	
 	//findCpf
 	public String findCpf(String cpfN) {	
 		String cpf = "";
@@ -54,7 +49,7 @@ public class PatientData {
 					);
 			
 		}else {
-			throw new BusinessExceptio("Usuario não encontrado");
+			throw new BusinessExceptio("This Patient not exist");
 		}
 		return datasIsntance;
 	}

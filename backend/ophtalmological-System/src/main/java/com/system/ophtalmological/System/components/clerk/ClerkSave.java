@@ -1,9 +1,6 @@
 package com.system.ophtalmological.System.components.clerk;
 
-import com.system.ophtalmological.System.entity.Department;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,11 +15,11 @@ public class ClerkSave {
 	private String matherName;
 	private String fatherName;
 	private String birthDate;	
-	private Department department;
+	private Long department;
 	
 	public ClerkSave(//Long id, 
 			String fullname, String cpf, String rg, String email, String matherName,
-			String fatherName, String birthDate, Department department) {
+			String fatherName, String birthDate, Long department) {
 		super();
 		//this.id = id;
 		this.fullname = fullname;

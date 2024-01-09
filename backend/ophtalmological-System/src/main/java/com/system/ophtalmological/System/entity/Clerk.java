@@ -1,15 +1,19 @@
 package com.system.ophtalmological.System.entity;
 
+import java.util.Optional;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-public abstract class Clerk extends Person{
+@Table(name="clerk")
+public  class Clerk extends Person{
 	@ManyToOne
 	@JoinColumn(name="department_id")
 	private Department department;
@@ -21,12 +25,9 @@ public abstract class Clerk extends Person{
 		this.department = department;
 	}
 
-
 	public Clerk() {
 		super();
 	}
 
 	
-	
-
 }

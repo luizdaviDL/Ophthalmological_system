@@ -15,21 +15,19 @@ public class DepartmentDto {
 
 	private Long id;
 	private String name;
-	private List<Clerk> clerkDto;
+	//private List<Clerk> clerkDto;
 	
-	
-
 	public DepartmentDto() {
 		super();
 	}
 
 
-	public DepartmentDto(Long id, String name, List<Clerk> list) {
+	/*public DepartmentDto(Long id, String name, List<Clerk> list) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.clerkDto = list;
-	}
+	}*/
 
 	public DepartmentDto(Department i) {
 		super();
