@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,10 +24,16 @@ public class ClerkController {
 
 	@Autowired
 	private ClerkService service;
-	//save
+	
 	@PostMapping
 	public ResponseEntity<ClerkDto> save(@RequestBody ClerkSave data){
 		ClerkDto save = service.save(data);
+		return ResponseEntity.status(HttpStatus.CREATED).body(save);			
+	}
+	
+	@PutMapping(value="/updateClerck")
+	public ResponseEntity<ClerkDto> update(@RequestBody ClerkSave data){
+		ClerkDto save = service.updateClerck(data);
 		return ResponseEntity.status(HttpStatus.CREATED).body(save);			
 	}
 	
@@ -36,11 +44,15 @@ public class ClerkController {
 	}
 	
 	@GetMapping(value="/clerkDocument")
-	public ResponseEntity<ClerkDto> findByDocument(@RequestBody ClerkDocument data) {
-		System.out.print("Dado"+data.getDocument());
-		ClerkDto clerk = service.getDocument(data.getDocument());
+	public ResponseEntity<ClerkDto> findByDocument(@RequestBody ClerkDocument data) {		
+		ClerkDto clerk = service.getDocument(data);
 		return ResponseEntity.status(HttpStatus.OK).body(clerk);	
 	}
 	
+	@DeleteMapping
+	public ResponseEntity<List<ClerkDto>> delete(@RequestBody ClerkSave data){
+		List<ClerkDto> save = service.deleteClerck(data);
+		return ResponseEntity.status(HttpStatus.CREATED).body(save);			
+	}
 	
 }

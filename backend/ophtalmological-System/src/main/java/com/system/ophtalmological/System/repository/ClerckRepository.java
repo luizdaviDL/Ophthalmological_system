@@ -11,9 +11,8 @@ import com.system.ophtalmological.System.entity.Clerk;
 @Repository
 public interface ClerckRepository extends JpaRepository<Clerk, Long>{
 
-	Optional<Clerk> findByCpf(String document);
+	Optional<Clerk> findByCpf (String cpf);
 
 	
-
 
 }

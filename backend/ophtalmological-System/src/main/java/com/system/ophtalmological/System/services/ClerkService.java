@@ -1,5 +1,6 @@
 package com.system.ophtalmological.System.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +20,7 @@ import com.system.ophtalmological.System.repository.DepartmentRepository;
 
 @Service
 public class ClerkService {
-	/*@Autowired
-	private ClerckRepository repository;*/
+	
 	@Autowired
 	public ClerkData components;
 	@Autowired
@@ -34,6 +34,10 @@ public class ClerkService {
 		if(department.isPresent()) {
 			Clerk clerkToEntity = components.clerkData(data,department.get());
 			Clerk save = repository.save(clerkToEntity);
+			List<Clerk> clerks = new ArrayList<>();
+			clerks.add(save);
+			//ClerkDto addClerck = new ClerkDto(data);
+			department.get().setClerk(clerks);
 			DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
 			dto = new ClerkDto(save,departmentDto);
 		}else {
@@ -49,19 +53,48 @@ public class ClerkService {
 		return list;
 	}
 
-	public ClerkDto getDocument(String data) {
-		//System.out.print(data);
-		/*ClerkDto dto = null; 
-		Optional<Clerk> fingDocument = repository.findByCpf(data.getDocument());
-		//String document = components.findDocument(data.getDocument());
-		if(fingDocument.isPresent()) {
-			throw new BusinessExceptio("ok");
-			//DepartmentDto departmentDto = new DepartmentDto(fingDocument.get().getDepartment());
-			//dto = new ClerkDto(fingDocument.get(),departmentDto);
+	public ClerkDto getDocument(ClerkDocument data) {
+		ClerkDto dto = null; 	
+		Clerk fingDocument = components.findDocument(data.getCpf());
+		if(fingDocument!=null) {
+			DepartmentDto departmentDto = new DepartmentDto(fingDocument.getDepartment());
+			dto = new ClerkDto(fingDocument,departmentDto);
 		}else {
 			throw new BusinessExceptio("This clerck not exist");
-		}*/
-		return null;
+		}
+		return dto;
+	}
+
+	public ClerkDto updateClerck(ClerkSave data) {
+		ClerkDto dto = null; 
+		try {
+			Optional<Clerk> getId = repository.findById(data.getId());
+			Optional<Department> department = DepartmenRepositoty.findAllById(data.getDepartment());
+			if(getId.isPresent() && department.isPresent()) {			
+				Clerk clerkToEntity = components.clerkData(data,department.get());
+				Clerk save = repository.save(clerkToEntity);
+				DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
+				dto = new ClerkDto(save,departmentDto);
+			}
+		}catch(Exception e) {
+			System.out.print(e);
+		}
+		
+		return dto;
+	}
+
+	public List<ClerkDto> deleteClerck(ClerkSave data) {
+		try {
+			Optional<Clerk> getId = repository.findById(data.getId());
+			if(getId.isPresent()) {
+				repository.deleteById(data.getId());
+			}
+			
+		}catch(Exception e){
+			System.out.print(e);
+		}
+		
+		return getAll();
 	}
 
 

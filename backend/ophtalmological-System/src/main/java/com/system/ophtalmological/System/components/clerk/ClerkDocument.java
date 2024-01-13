@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ClerkDocument {
-	private String document;
+	private String cpf;
 
 	public ClerkDocument() {
 		super();
@@ -14,7 +14,7 @@ public class ClerkDocument {
 
 	public ClerkDocument(String document) {
 		super();
-		this.document = document;
+		this.cpf = document;
 	}
 	
 	

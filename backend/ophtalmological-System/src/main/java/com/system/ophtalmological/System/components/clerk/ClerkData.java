@@ -21,29 +21,45 @@ public class ClerkData {
 	public ClerckRepository repository;
 
 	public Clerk clerkData(ClerkSave data, Department department) {
-		Clerk toData = mapper.map(data, Clerk.class);
-		toData.setDepartment(department);
+		Clerk toData = null;
+		try {
+			toData = mapper.map(data, Clerk.class);
+			toData.setDepartment(department);
+		}catch(Exception e){
+			System.out.print(e);
+		}
+		
 		return toData;
 	}
 	
 	public List<ClerkDto> clerksDto(List<Clerk> data){
 		List<ClerkDto> listClerk = new ArrayList<>();
-		data.stream().forEach(i ->{
-			DepartmentDto departmentDto = new DepartmentDto(i.getDepartment());
-			ClerkDto dto = new ClerkDto(i,departmentDto);
-			listClerk.add(dto);
-		});
+		try {			
+			data.stream().forEach(i ->{
+				DepartmentDto departmentDto = new DepartmentDto(i.getDepartment());
+				ClerkDto dto = new ClerkDto(i,departmentDto);
+				listClerk.add(dto);
+			});
+		}catch(Exception e) {			
+			System.out.print(e);
+		}
+		
 		return listClerk;
 	}
 
-	/*public String findDocument(String document) {
-		String value = null;
-		Optional<Clerk> fingDocument = repository.findByCpf(document);
-		if(fingDocument.isPresent()) {
-			value = fingDocument.get().getCpf();
+	public Clerk findDocument(String document) {
+		Clerk value = null;
+		try {			
+			Optional<Clerk> fingDocument = repository.findByCpf(document);
+			if(fingDocument.isPresent()) {			
+				value = fingDocument.get();
+			}
+		}catch(Exception e) {
+			value = null;
+			System.out.print(e);
 		}
+		
 		return value;
-	}*/
+	}
 	
-
 }

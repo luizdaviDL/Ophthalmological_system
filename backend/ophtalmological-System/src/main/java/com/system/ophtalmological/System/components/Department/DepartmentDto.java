@@ -15,18 +15,19 @@ public class DepartmentDto {
 
 	private Long id;
 	private String name;
-	//private List<Clerk> clerkDto;
+	//private List<ClerkDto> clerk;
 	
 	public DepartmentDto() {
 		super();
 	}
 
-
-	/*public DepartmentDto(Long id, String name, List<Clerk> list) {
+/*
+	public DepartmentDto(Department i, ClerkDto clerck) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.clerkDto = list;
+		this.id = i.getId();
+		this.name = i.getName();	
+		this.clerk = clerck;
+		
 	}*/
 
 	public DepartmentDto(Department i) {

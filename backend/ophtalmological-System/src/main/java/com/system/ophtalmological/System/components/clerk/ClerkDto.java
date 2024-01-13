@@ -1,5 +1,7 @@
 package com.system.ophtalmological.System.components.clerk;
 
+import java.util.List;
+
 import com.system.ophtalmological.System.components.Department.DepartmentDto;
 import com.system.ophtalmological.System.entity.Clerk;
 import com.system.ophtalmological.System.entity.Department;
@@ -24,13 +26,20 @@ public class ClerkDto {
 		this.birthDate = save.getBirthDate();
 		this.department = department;
 	}
-	public ClerkDto(Clerk i) {
+	public ClerkDto(ClerkSave i) {
 		super();
 		this.id = i.getId();
 		this.fullname = i.getFullname();
 		this.birthDate = i.getBirthDate();
 		//this.department = i.getDepartment();
 	}
+	public ClerkDto(Clerk i) {
+		super();
+		this.id = i.getId();
+		this.fullname = i.getFullname();
+		this.birthDate = i.getBirthDate();
+	}
+	
 	
 	
 		

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.system.ophtalmological.System.components.Department.AllDepartmentDto;
 import com.system.ophtalmological.System.components.Department.DepartmentDto;
 import com.system.ophtalmological.System.components.Department.DepartmentSave;
+import com.system.ophtalmological.System.entity.Department;
 import com.system.ophtalmological.System.services.DepartmentService;
 
 @RestController
@@ -32,8 +34,8 @@ public class DepartmentControler {
 	
 	//getAll
 	@GetMapping(value="/departments")
-	public ResponseEntity<List<DepartmentDto>> getAll() {
-		List<DepartmentDto> save = service.getAll();
+	public ResponseEntity<List<Department>> getAll() {
+		List<Department> save = service.getAll();
 		return ResponseEntity.status(HttpStatus.CREATED).body(save);
 	}
 	//update
@@ -42,12 +44,14 @@ public class DepartmentControler {
 		DepartmentDto save = service.update(data);
 		return ResponseEntity.status(HttpStatus.CREATED).body(save);
 	}
+	/*
 	//getByname
 	@GetMapping(value="/departmentName")
 	public ResponseEntity<DepartmentDto> getName(@RequestBody DepartmentSave data) {
 		DepartmentDto save = service.getByname(data);
 		return ResponseEntity.status(HttpStatus.CREATED).body(save);
 	}
+	*/
 	//delete
 	@DeleteMapping(value="/delete")
 	public ResponseEntity<DepartmentDto> delete(@RequestBody DepartmentSave data) {
