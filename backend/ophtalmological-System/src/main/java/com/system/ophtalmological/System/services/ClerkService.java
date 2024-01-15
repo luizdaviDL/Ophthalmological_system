@@ -30,18 +30,24 @@ public class ClerkService {
 	
 	public ClerkDto save(ClerkSave data) {
 		ClerkDto dto = null; 
-		Optional<Department> department = DepartmenRepositoty.findAllById(data.getDepartment());
-		if(department.isPresent()) {
-			Clerk clerkToEntity = components.clerkData(data,department.get());
-			Clerk save = repository.save(clerkToEntity);
-			List<Clerk> clerks = new ArrayList<>();
-			clerks.add(save);
-			//ClerkDto addClerck = new ClerkDto(data);
-			department.get().setClerk(clerks);
-			DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
-			dto = new ClerkDto(save,departmentDto);
-		}else {
-			throw new BusinessExceptio("This dapartment not exist");
+		Optional<Department> department = DepartmenRepositoty.findById(data.getDepartment());
+		try {
+			if(department.isPresent()){
+				Clerk clerkToEntity = components.clerkData(data,department.get());
+				Clerk save = repository.save(clerkToEntity);
+				if(department.get().getId().equals(data.getDepartment())) {
+					department.get().getClerk().add(save);
+					DepartmenRepositoty.save(department.get());
+				}else {
+					throw new BusinessExceptio("Erro to add clerck to list");
+				}
+				DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
+				dto = new ClerkDto(save,departmentDto);
+			}else {
+				throw new BusinessExceptio("This dapartment not exist");
+			}
+		}catch(Exception e) {
+			System.out.print(e);
 		}
 		
 		return dto;

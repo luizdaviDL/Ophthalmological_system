@@ -2,11 +2,14 @@ package com.system.ophtalmological.System.components.Department;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.system.ophtalmological.System.components.clerk.ClerkData;
 import com.system.ophtalmological.System.components.clerk.ClerkDto;
 import com.system.ophtalmological.System.entity.Department;
 
@@ -15,29 +18,28 @@ public class DepartmentData {
 	
 	@Autowired
 	private  ModelMapper mapper;
+	@Autowired
+	public ClerkData components;
 
 	//Transform data to Class
 	public Department departmentData(DepartmentSave data) {
 		return mapper.map(data, Department.class);		
 	}
 
-
+	
 	public List<AllDepartmentDto> getAll(List<Department> data) {
-	    List<AllDepartmentDto> list = new ArrayList<>();
-	    data.stream().forEach(i -> {
-	        //ClerkDto dtoClerck = null;  // Inicialize dentro do loop interno
-	        i.getClerk().stream().forEach(value -> {
-	        	ClerkDto dtoClerck = new ClerkDto(value);
-	            AllDepartmentDto dto = new AllDepartmentDto(i);
-		        dto.setClerk(dtoClerck);
-		        list.add(dto);
-	        });
-	        
-	    });
-	    return list;
+	    Map<Long, List<ClerkDto>> clerkMap = data.stream()
+	            .collect(Collectors.toMap(
+	                    Department::getId,
+	                    d -> components.clerksDto(d.getClerk())
+	            ));
+
+	    return data.stream()
+	            .map(d -> new AllDepartmentDto(d, clerkMap.getOrDefault(d.getId(), new ArrayList<>())))
+	            .collect(Collectors.toList());
 	}
 	
-	/*public List<ClerkDto> clerksDtoList(List<ClerkDto> list){
+	public List<AllDepartmentDto> clerksDtoList(List<ClerkDto> list){
 		List<ClerkDto> listClerk = new ArrayList<>();
 		try {			
 			list.stream().forEach(i ->{
@@ -50,7 +52,7 @@ public class DepartmentData {
 		}
 		
 		return listClerk;
-	}*/
+	}
 	/*
 	public List<DepartmentDto> departmentList(Department i, List<ClerkDto> clerck) {
 		List<DepartmentDto> dto = null;

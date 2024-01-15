@@ -41,16 +41,11 @@ public class DepartmentService {
 		return dto;
 	}
 
-	/*
+	
 	public List<AllDepartmentDto> getAll() {
 		List<Department> departments = repository.findAll(); 
 		List<AllDepartmentDto> getDto = dataDepartmen.getAll(departments);
 		return getDto;
-	}*/
-	public List<Department> getAll() {
-		List<Department> departments = repository.findAll(); 
-		//List<AllDepartmentDto> getDto = dataDepartmen.getAll(departments);
-		return departments;
 	}
 
 	public DepartmentDto update(DepartmentSave data) {
@@ -66,7 +61,7 @@ public class DepartmentService {
 		
 		return dto;
 	}
-	/*
+	
 	
 	public List<DepartmentDto> getByname(DepartmentSave data) {
 		List<DepartmentDto> dto = null;
@@ -74,14 +69,14 @@ public class DepartmentService {
 		Optional<Department> department = repository.findByName(transform.getName());
 		
 		if(department.isPresent()) {			
-			List<ClerkDto> list = dataDepartmen.clerksDtoList(department.get().getClerk());
+			List<AllDepartmentDto> list = dataDepartmen.clerksDtoList(department.get().getClerk());
 			dto = dataDepartmen.departmentList(department.get(), department.get().getClerk());
 		}else {
 			throw new BusinessExceptio("This department not exist");
 		}
 		System.out.print(dto);
 		return dto;
-	}*/
+	}
 
 	public DepartmentDto delete(DepartmentSave data) {
 		DepartmentDto dto = null;
