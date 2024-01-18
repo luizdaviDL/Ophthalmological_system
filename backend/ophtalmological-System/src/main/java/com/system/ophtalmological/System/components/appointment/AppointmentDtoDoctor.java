@@ -1,5 +1,6 @@
 package com.system.ophtalmological.System.components.appointment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.system.ophtalmological.System.entity.Appointment;
@@ -12,16 +13,20 @@ import lombok.Setter;
 public class AppointmentDtoDoctor {
 	private Long id;
 	private String name;
-	private DoctorDto doctors;
+	private List<DoctorDto> doctors;
+	
 	public AppointmentDtoDoctor() {
 		super();
 	}
-	public AppointmentDtoDoctor(Long id, String name, DoctorDto doctors) {
+	public AppointmentDtoDoctor(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.doctors = doctors;
+		
 	}
 	
-	
+	public void doctorToList(DoctorDto data) {
+		this.doctors = new ArrayList<>();
+		this.doctors.add(data);
+	}
 }

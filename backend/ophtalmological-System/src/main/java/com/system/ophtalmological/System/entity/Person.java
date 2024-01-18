@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

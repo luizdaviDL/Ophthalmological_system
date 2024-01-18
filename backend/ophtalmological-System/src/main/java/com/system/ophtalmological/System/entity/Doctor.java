@@ -1,5 +1,6 @@
 package com.system.ophtalmological.System.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -16,19 +17,23 @@ import lombok.Setter;
 @Table(name="doctor")
 @Entity
 public class Doctor extends Clerk{
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	
 	@OneToMany
-	private List<Appointment> especialty;
+	private List<Appointment> especiality;
 	public Doctor(String fullname, String cpf, String rg, String email, String matherName,
-			String fatherName, String birthDate, Department department, Long id, List<Appointment> especialty) {
+			String fatherName, String birthDate, Department department, List<Appointment> especiality) {
 		super(fullname, cpf, rg, email, matherName, fatherName, birthDate, department);
-		this.id = id;
-		this.especialty = especialty;
+		this.especiality = new ArrayList<>();
+		this.especiality.addAll(especiality);
+		//setEspeciality(especiality);
 	}
-	
-	
-	
-	
+	/*
+	public void setEspeciality(List<Appointment> data) {
+		this.especiality.addAll(data);
+	}*/
+
+	public Doctor() {
+		super();
+	}
+
 }

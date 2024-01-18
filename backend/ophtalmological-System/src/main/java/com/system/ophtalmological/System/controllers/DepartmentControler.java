@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.system.ophtalmological.System.components.Department.AllDepartmentDto;
 import com.system.ophtalmological.System.components.Department.DepartmentDto;
 import com.system.ophtalmological.System.components.Department.DepartmentSave;
-import com.system.ophtalmological.System.entity.Department;
+import com.system.ophtalmological.System.components.clerk.ClerkDto;
 import com.system.ophtalmological.System.services.DepartmentService;
 
 @RestController
@@ -47,8 +47,8 @@ public class DepartmentControler {
 	
 	//getByname
 	@GetMapping(value="/departmentName")
-	public ResponseEntity<DepartmentDto> getName(@RequestBody DepartmentSave data) {
-		DepartmentDto save = service.getByname(data);
+	public ResponseEntity<List<ClerkDto>> getName(@RequestBody DepartmentSave data) {
+		List<ClerkDto> save = service.getByname(data);
 		return ResponseEntity.status(HttpStatus.CREATED).body(save);
 	}
 	

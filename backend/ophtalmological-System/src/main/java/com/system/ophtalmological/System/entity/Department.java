@@ -41,5 +41,8 @@ public class Department {
 	}
 
 	
+	public void removeClerck(Long data) {
+		clerk.removeIf(clerk -> clerk.getId().equals(data));
+	}
 	
 }

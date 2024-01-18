@@ -38,21 +38,19 @@ public class DepartmentData {
 	            .map(d -> new AllDepartmentDto(d, clerkMap.getOrDefault(d.getId(), new ArrayList<>())))
 	            .collect(Collectors.toList());
 	}
-	
-	public List<AllDepartmentDto> clerksDtoList(List<ClerkDto> list){
-		List<ClerkDto> listClerk = new ArrayList<>();
-		try {			
-			list.stream().forEach(i ->{
-				//DepartmentDto departmentDto = new DepartmentDto(i.getDepartment());
-				ClerkDto dto = new ClerkDto(i);
-				listClerk.add(dto);
-			});
-		}catch(Exception e) {			
+
+
+	public List<ClerkDto> getDepartmentData(Department department) {
+		List<ClerkDto> clercks = null;
+		try {
+			clercks = components.clerksDto(department.getClerk());
+		}catch(Exception e) {
 			System.out.print(e);
 		}
-		
-		return listClerk;
+		return  clercks ;
 	}
+	
+	
 	/*
 	public List<DepartmentDto> departmentList(Department i, List<ClerkDto> clerck) {
 		List<DepartmentDto> dto = null;

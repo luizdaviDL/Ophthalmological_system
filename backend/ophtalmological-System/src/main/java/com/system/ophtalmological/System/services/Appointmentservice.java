@@ -12,6 +12,7 @@ import com.system.ophtalmological.System.components.appointment.AppointmentDto;
 import com.system.ophtalmological.System.components.appointment.AppointmentDtoDoctor;
 import com.system.ophtalmological.System.components.appointment.AppointmentSave;
 import com.system.ophtalmological.System.components.appointment.DoctorDto;
+import com.system.ophtalmological.System.components.doctor.DoctorData;
 import com.system.ophtalmological.System.entity.Appointment;
 import com.system.ophtalmological.System.entity.Doctor;
 import com.system.ophtalmological.System.repository.AppointmentRepository;
@@ -22,6 +23,10 @@ public class Appointmentservice {
 	private AppointmentRepository repository;
 	@Autowired
 	private AppointmentData dataClass;
+	@Autowired
+	private DoctorData dataDoctor;
+	@Autowired
+	private AppointmentData appointmentData;
 	
 	//save
 	public AppointmentDto saveAppointment(AppointmentSave data) {
@@ -57,29 +62,24 @@ public class Appointmentservice {
 		
 	}
 
-	public AppointmentDtoDoctor getByName(AppointmentSave data) {
-		//search the appointment name 
+	public AppointmentDtoDoctor getByName(AppointmentSave data) {		
 		Optional<Appointment> appointment = repository.getByname(data.getName());
-		//instantiating AppointmentDtoDoctor
+		List<Doctor> doctors = dataDoctor.getDoctors(appointment.get().getDoctors());		
 		AppointmentDtoDoctor result = new AppointmentDtoDoctor();
-		if(appointment.isPresent()) {			
-			//getting the appointment class	
-			Appointment aptvalue = appointment.get();
-			//setting 	appointment value	
-			result.setId(aptvalue.getId());
-			result.setName(aptvalue.getName());
+		
+		if(appointment.isPresent()) {								
+			result.setId(appointment.get().getId());
+			result.setName(appointment.get().getName());
+						
 			
-			//checking if Doctor list have values
-			if(!aptvalue.getDoctors().isEmpty()) {
-				//for each doctor in the list setting in to DoctorDto and setting doctors too
-				aptvalue.getDoctors().stream().forEach(i->{
-					DoctorDto dtoDc = new DoctorDto();
-					dtoDc.setId(i.getId());
-					dtoDc.setFullname(i.getFullname());
-					dtoDc.setEspecialty(i.getEspecialty());
-					result.setDoctors(dtoDc);
-				});
-			}
+			//for each doctor in the list setting in to DoctorDto and setting doctors too				
+			doctors.stream().forEach(i->{
+				List<Appointment> appointments = dataDoctor.getAppointmentList(i.getEspeciality());
+				List<AppointmentDto> appointmentList = appointmentData.getAll(appointments);
+				DoctorDto dtoDc = new DoctorDto(i,appointmentList);
+				result.doctorToList(dtoDc);
+			});
+			
 						
 		}
 		return result;

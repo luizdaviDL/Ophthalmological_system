@@ -3,8 +3,11 @@ package com.system.ophtalmological.System.entity;
 import java.util.Optional;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +16,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="clerk")
-public  class Clerk extends Person{
+//@Inheritance(strategy = InheritanceType.JOINED)
+public class Clerk extends Person{
 	@ManyToOne
 	@JoinColumn(name="department_id")
 	private Department department;

@@ -93,7 +93,15 @@ public class ClerkService {
 		try {
 			Optional<Clerk> getId = repository.findById(data.getId());
 			if(getId.isPresent()) {
-				repository.deleteById(data.getId());
+				Optional<Department> department = DepartmenRepositoty.findById(getId.get().getDepartment().getId());
+				if(department.isPresent()) {
+					try {
+						department.get().removeClerck(getId.get().getId());
+						repository.deleteById(data.getId());
+					}catch(Exception e) {
+						System.out.print(e);
+					}
+				}
 			}
 			
 		}catch(Exception e){

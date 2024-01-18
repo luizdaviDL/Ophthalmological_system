@@ -12,6 +12,7 @@ import com.system.ophtalmological.System.components.Department.DepartmentData;
 import com.system.ophtalmological.System.components.Department.DepartmentDto;
 import com.system.ophtalmological.System.components.Department.DepartmentSave;
 import com.system.ophtalmological.System.components.clerk.ClerkData;
+import com.system.ophtalmological.System.components.clerk.ClerkDto;
 import com.system.ophtalmological.System.entity.Department;
 import com.system.ophtalmological.System.repository.DepartmentRepository;
 
@@ -63,19 +64,15 @@ public class DepartmentService {
 	}
 	
 	
-	public List<DepartmentDto> getByname(DepartmentSave data) {
-		List<DepartmentDto> dto = null;
-		Department transform = dataDepartmen.departmentData(data);
-		Optional<Department> department = repository.findByName(transform.getName());
-		
-		if(department.isPresent()) {			
-			List<AllDepartmentDto> list = dataDepartmen.clerksDtoList(department.get().getClerk());
-			dto = dataDepartmen.departmentList(department.get(), department.get().getClerk());
+	public List<ClerkDto> getByname(DepartmentSave data) {
+		List<ClerkDto> dataResult = null;
+		Optional<Department> department = repository.findByName(data.getName());
+		if(department.isPresent()) {
+			dataResult = dataDepartmen.getDepartmentData(department.get());
 		}else {
 			throw new BusinessExceptio("This department not exist");
 		}
-		System.out.print(dto);
-		return dto;
+		return dataResult;
 	}
 
 	public DepartmentDto delete(DepartmentSave data) {
