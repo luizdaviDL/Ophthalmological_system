@@ -25,12 +25,12 @@ public class Diary {
 	@ManyToOne
 	private Appointment appointment; //consulta
 	@ManyToOne
-	private Doctor doctor;
+	private Clerk doctor;
 	private LocalDate date;
 	private LocalTime time;
 	@ManyToOne
 	private Status status;
-	public Diary(Long id, Patient patient, Appointment appointment, Doctor doctor, LocalDate date, LocalTime time,
+	public Diary(Long id, Patient patient, Appointment appointment, Clerk doctor, LocalDate date, LocalTime time,
 			Status status) {
 		super();
 		this.id = id;

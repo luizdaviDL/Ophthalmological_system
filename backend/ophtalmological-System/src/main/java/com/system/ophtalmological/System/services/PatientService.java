@@ -27,7 +27,7 @@ public class PatientService {
 		//variable
 		Patient savePa = null;
 		PatientDto paDto = null;
-		Patient paClass = dataClass.patientData(patient);
+		Patient paClass = dataClass.patientData(patient);		
 		String paCpf = dataClass.findCpf(paClass.getCpf());
 		if(paCpf == null) {
 			 savePa = repository.save(paClass);

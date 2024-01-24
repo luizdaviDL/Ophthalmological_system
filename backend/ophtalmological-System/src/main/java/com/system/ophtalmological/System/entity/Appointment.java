@@ -22,7 +22,7 @@ public class Appointment {
 	private Long id;
 	private String name;
 	@ManyToMany
-	private List<Doctor> doctors = new ArrayList<>();
+	private List<Clerk> doctors = new ArrayList<>();
 	
 	
 

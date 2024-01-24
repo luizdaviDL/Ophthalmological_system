@@ -11,8 +11,6 @@ import com.system.ophtalmological.System.components.appointment.AppointmentData;
 import com.system.ophtalmological.System.components.appointment.AppointmentDto;
 import com.system.ophtalmological.System.components.appointment.AppointmentDtoDoctor;
 import com.system.ophtalmological.System.components.appointment.AppointmentSave;
-import com.system.ophtalmological.System.components.appointment.DoctorDto;
-import com.system.ophtalmological.System.components.doctor.DoctorData;
 import com.system.ophtalmological.System.entity.Appointment;
 import com.system.ophtalmological.System.entity.Doctor;
 import com.system.ophtalmological.System.repository.AppointmentRepository;
@@ -23,8 +21,7 @@ public class Appointmentservice {
 	private AppointmentRepository repository;
 	@Autowired
 	private AppointmentData dataClass;
-	@Autowired
-	private DoctorData dataDoctor;
+
 	@Autowired
 	private AppointmentData appointmentData;
 	
@@ -62,9 +59,9 @@ public class Appointmentservice {
 		
 	}
 
-	public AppointmentDtoDoctor getByName(AppointmentSave data) {		
+	/*public AppointmentDtoDoctor getByName(AppointmentSave data) {		
 		Optional<Appointment> appointment = repository.getByname(data.getName());
-		List<Doctor> doctors = dataDoctor.getDoctors(appointment.get().getDoctors());		
+		//List<Doctor> doctors = dataDoctor.getDoctors(appointment.get().getDoctors());		
 		AppointmentDtoDoctor result = new AppointmentDtoDoctor();
 		
 		if(appointment.isPresent()) {								
@@ -83,7 +80,7 @@ public class Appointmentservice {
 						
 		}
 		return result;
-	}
+	}*/
 
 	public AppointmentDtoDoctor delete(Long id) {
 		Optional<Appointment> appointment = repository.findById(id);

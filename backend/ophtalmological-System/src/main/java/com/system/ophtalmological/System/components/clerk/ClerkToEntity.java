@@ -1,4 +1,4 @@
-package com.system.ophtalmological.System.components.doctor;
+package com.system.ophtalmological.System.components.clerk;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
-public class DoctorToEntity {
+public class ClerkToEntity {
 	
 	private String fullname;
 	private String cpf;
@@ -22,8 +22,7 @@ public class DoctorToEntity {
 	private Department department;
 	private List<Appointment> especiality;
 	
-	public DoctorToEntity(DoctorSave data, Department department, List<Appointment> appointments) {
-		super();
+	public ClerkToEntity(ClerkSave data, Department department, List<Appointment> getAppointment) {
 		this.fullname = data.getFullname();
 		this.cpf = data.getCpf();
 		this.rg = data.getRg();
@@ -33,8 +32,6 @@ public class DoctorToEntity {
 		this.birthDate = data.getBirthDate();
 		this.department = department;
 		this.especiality = new ArrayList<>();
-		this.especiality.addAll(appointments);
-		
+		this.especiality.addAll(getAppointment);
 	}
-	
 }

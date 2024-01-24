@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.system.ophtalmological.System.components.Department.DepartmentDto;
+import com.system.ophtalmological.System.components.doctor.DoctorSave;
+import com.system.ophtalmological.System.entity.Appointment;
 import com.system.ophtalmological.System.entity.Clerk;
 import com.system.ophtalmological.System.entity.Department;
 import com.system.ophtalmological.System.repository.ClerckRepository;
@@ -19,18 +21,21 @@ public class ClerkData {
 	private ModelMapper mapper;
 	@Autowired
 	public ClerckRepository repository;
-
-	public Clerk clerkData(ClerkSave data, Department department) {
+	
+	/*
+	public Clerk clerkData(ClerkToEntity data) {
 		Clerk toData = null;
 		try {
 			toData = mapper.map(data, Clerk.class);
-			toData.setDepartment(department);
+			/*toData.setDepartment(data.getDepartment());
+			toData.getEspeciality().addAll(data.getEspeciality());
 		}catch(Exception e){
 			System.out.print(e);
 		}
 		
 		return toData;
-	}
+	}*/
+	
 	
 	public List<ClerkDto> clerksDto(List<Clerk> data){
 		List<ClerkDto> listClerk = new ArrayList<>();
@@ -47,12 +52,12 @@ public class ClerkData {
 		return listClerk;
 	}
 
-	public Clerk findDocument(String document) {
-		Clerk value = null;
+	public String findDocument(String document) {
+		String value = null;
 		try {			
 			Optional<Clerk> fingDocument = repository.findByCpf(document);
 			if(fingDocument.isPresent()) {			
-				value = fingDocument.get();
+				value = fingDocument.get().getCpf();
 			}
 		}catch(Exception e) {
 			value = null;
@@ -61,5 +66,35 @@ public class ClerkData {
 		
 		return value;
 	}
+
+
+
+	public Clerk clerkData(ClerkSave data, Department department, List<Appointment> appointments) {
+		Clerk toData = null;
+		try {
+			toData = mapper.map(data, Clerk.class);
+			toData.setDepartment(department);
+			toData.addEspecialitys(appointments);			
+		}catch(Exception e){
+			System.out.print(e);
+		}
+		
+		return toData;
+	}
+
+	public Clerk clerkData(ClerkSave data, Department department) {
+		Clerk toData = null;
+		try {
+			toData = mapper.map(data, Clerk.class);
+			toData.setDepartment(department);		
+		}catch(Exception e){
+			System.out.print(e);
+		}
+		
+		return toData;
+	}
+
+
+	
 	
 }

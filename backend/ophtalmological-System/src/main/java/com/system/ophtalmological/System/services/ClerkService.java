@@ -1,6 +1,5 @@
 package com.system.ophtalmological.System.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,12 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.system.ophtalmological.System.components.BusinessExceptio;
 import com.system.ophtalmological.System.components.Department.DepartmentDto;
+import com.system.ophtalmological.System.components.appointment.AppointmentData;
+import com.system.ophtalmological.System.components.appointment.AppointmentDto;
 import com.system.ophtalmological.System.components.clerk.ClerkData;
 import com.system.ophtalmological.System.components.clerk.ClerkDocument;
 import com.system.ophtalmological.System.components.clerk.ClerkDto;
 import com.system.ophtalmological.System.components.clerk.ClerkSave;
+import com.system.ophtalmological.System.entity.Appointment;
 import com.system.ophtalmological.System.entity.Clerk;
 import com.system.ophtalmological.System.entity.Department;
+import com.system.ophtalmological.System.repository.AppointmentRepository;
 import com.system.ophtalmological.System.repository.ClerckRepository;
 import com.system.ophtalmological.System.repository.DepartmentRepository;
 
@@ -24,10 +27,58 @@ public class ClerkService {
 	@Autowired
 	public ClerkData components;
 	@Autowired
+	public AppointmentData dataAppointment;
+	@Autowired
 	public ClerckRepository repository;
 	@Autowired
 	public DepartmentRepository DepartmenRepositoty;
+	@Autowired
+	public AppointmentRepository appointmentRepository;
 	
+	public ClerkDto save(ClerkSave data) {
+		ClerkDto dto = null; 
+		Clerk save = null;
+		Optional<Department> department = DepartmenRepositoty.findById(data.getDepartment());
+		String document = components.findDocument(data.getCpf());
+		System.out.println("Documento: " + document);
+		try {
+			if(document == null) {
+				if(data.getEspeciality() !=null && department.isPresent()) {
+					List<Appointment> appointments = dataAppointment.getAppointments(data.getEspeciality());
+					if(appointments !=null) {
+						Clerk entity = components.clerkData(data, department.get(), appointments);
+						save = repository.save(entity);
+												
+					}
+				}else if(data.getEspeciality() ==null && department.isPresent()) {
+					Clerk clerkToEntity = components.clerkData(data,department.get());
+					save = repository.save(clerkToEntity);
+								
+				}else {
+					throw new BusinessExceptio("Erro in the process");
+				}
+				
+				if(department.get().getId().equals(data.getDepartment())) {
+					department.get().getClerk().add(save);
+					DepartmenRepositoty.save(department.get());
+				}else {
+					throw new BusinessExceptio("Erro to add clerck to list");
+				}
+				DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
+				List<AppointmentDto> dtoAppointment = dataAppointment.getAll(save.getEspeciality());
+				dto = new ClerkDto(save,departmentDto,dtoAppointment);
+			}else if(document == data.getCpf()) {
+				throw new BusinessExceptio("Clerk already exist");
+			}
+										
+		}catch(Exception e) {
+			System.out.print(e);
+		}
+		
+		return dto;
+		
+	}
+	/*
 	public ClerkDto save(ClerkSave data) {
 		ClerkDto dto = null; 
 		Optional<Department> department = DepartmenRepositoty.findById(data.getDepartment());
@@ -51,7 +102,7 @@ public class ClerkService {
 		}
 		
 		return dto;
-	}
+	}*/
 	
 	public List<ClerkDto> getAll() {
 		List<Clerk> clerks =  repository.findAll();

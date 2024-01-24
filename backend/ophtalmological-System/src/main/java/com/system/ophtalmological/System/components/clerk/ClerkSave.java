@@ -1,6 +1,9 @@
 package com.system.ophtalmological.System.components.clerk;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,25 +19,11 @@ public class ClerkSave {
 	private String fatherName;
 	private String birthDate;	
 	private Long department;
-	/*
-	public ClerkSave(//Long id, 
-			String fullname, String cpf, String rg, String email, String matherName,
+	private List<Long> especiality;
+
+	public ClerkSave( String fullname, String cpf, String rg, String email, String matherName,
 			String fatherName, String birthDate, Long department) {
 		super();
-		//this.id = id;
-		this.fullname = fullname;
-		this.cpf = cpf;
-		this.rg = rg;
-		this.email = email;
-		this.matherName = matherName;
-		this.fatherName = fatherName;
-		this.birthDate = birthDate;
-		this.department = department;
-	}*/
-	public ClerkSave(Long id, String fullname, String cpf, String rg, String email, String matherName,
-			String fatherName, String birthDate, Long department) {
-		super();
-		this.id = id;
 		this.fullname = fullname;
 		this.cpf = cpf;
 		this.rg = rg;
@@ -44,5 +33,25 @@ public class ClerkSave {
 		this.birthDate = birthDate;
 		this.department = department;
 	}
+	
+	public ClerkSave( String fullname, String cpf, String rg, String email, String matherName,
+			String fatherName, String birthDate, Long department,List<Long> especiality) {
+		super();
+		this.fullname = fullname;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.email = email;
+		this.matherName = matherName;
+		this.fatherName = fatherName;
+		this.birthDate = birthDate;
+		this.department = department;
+		this.especiality = new ArrayList<>();
+		this.especiality.addAll(especiality);
+	}
+
+	public ClerkSave() {
+		super();
+	}
+	
 	
 }

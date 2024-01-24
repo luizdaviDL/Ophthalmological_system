@@ -21,7 +21,7 @@ public class PatientData {
 	
 	//transform saveDto to class
 	public Patient patientData(SavePatientDto pa) {
-		return mapper.map(pa, Patient.class);
+		return mapper.map(pa, Patient.class);				
 	}
 	
 	//findCpf

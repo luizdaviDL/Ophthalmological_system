@@ -8,20 +8,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.system.ophtalmological.System.components.appointment.DoctorDto;
+import com.system.ophtalmological.System.components.doctor.DoctorDto;
 import com.system.ophtalmological.System.components.doctor.DoctorSave;
 import com.system.ophtalmological.System.services.DoctorService;
 
 @RestController
 @RequestMapping(value="/doctors")
 public class DoctorController {
+	
 	@Autowired
 	private DoctorService service;
 	
-	@PostMapping
-	public ResponseEntity<DoctorDto> save(@RequestBody DoctorSave data) {
-		 DoctorDto saveDoctor = service.save(data);
-		 return ResponseEntity.status(HttpStatus.CREATED).body(saveDoctor);
-	}
+	
+	
 
 }

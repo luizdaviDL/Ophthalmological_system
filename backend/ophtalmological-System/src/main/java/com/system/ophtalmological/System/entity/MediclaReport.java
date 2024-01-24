@@ -20,6 +20,6 @@ public class MediclaReport {
 	@OneToOne
 	private Patient patient;
 	@OneToOne
-	private Doctor doctor;
+	private Clerk doctor;
 	private String report;
 }

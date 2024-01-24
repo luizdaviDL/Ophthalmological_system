@@ -1,6 +1,8 @@
 package com.system.ophtalmological.System.entity;
 
 
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +16,8 @@ import lombok.Setter;
 @Setter
 
 @MappedSuperclass
-//@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
+
 public abstract class Person {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

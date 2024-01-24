@@ -47,11 +47,15 @@ public class AppointmentController {
 	}
 	
 	//getByname
+	
+	/*
 	@GetMapping(value="/appointmentvalue")
 	public ResponseEntity<AppointmentDtoDoctor> getByName(@RequestBody AppointmentSave data) {
 		AppointmentDtoDoctor servic = service.getByName(data);
 		return ResponseEntity.status(HttpStatus.OK).body(servic);
 	}
+	*/
+	
 	//delete
 	@DeleteMapping
 	public ResponseEntity<AppointmentDtoDoctor> delete(@RequestBody AppointmentSave data) {
