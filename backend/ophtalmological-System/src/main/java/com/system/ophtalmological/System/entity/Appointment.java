@@ -21,7 +21,7 @@ public class Appointment {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	@ManyToMany
+	@ManyToMany(mappedBy = "especiality")
 	private List<Clerk> doctors = new ArrayList<>();
 	
 	

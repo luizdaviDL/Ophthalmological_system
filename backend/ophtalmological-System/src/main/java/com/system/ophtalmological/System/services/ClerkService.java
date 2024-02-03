@@ -34,7 +34,7 @@ public class ClerkService {
 	public DepartmentRepository DepartmenRepositoty;
 	@Autowired
 	public AppointmentRepository appointmentRepository;
-	
+
 	public ClerkDto save(ClerkSave data) {
 		ClerkDto dto = null; 
 		Clerk save = null;
@@ -45,15 +45,14 @@ public class ClerkService {
 			if(document == null) {
 				if(data.getEspeciality() !=null && department.isPresent()) {
 					List<Appointment> appointments = dataAppointment.getAppointments(data.getEspeciality());
-					if(appointments !=null) {
-						Clerk entity = components.clerkData(data, department.get(), appointments);
-						save = repository.save(entity);
-												
+					if(appointments !=null) {					
+						Clerk entity = components.clerkData(data, department.get(), appointments);		
+						save = repository.save(entity);																	
 					}
 				}else if(data.getEspeciality() ==null && department.isPresent()) {
-					Clerk clerkToEntity = components.clerkData(data,department.get());
-					save = repository.save(clerkToEntity);
-								
+					Clerk clerkToEntity = components.clerkData(data,department.get());					
+					//save = repository.save(clerkToEntity);
+													
 				}else {
 					throw new BusinessExceptio("Erro in the process");
 				}
@@ -66,17 +65,18 @@ public class ClerkService {
 				}
 				DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
 				List<AppointmentDto> dtoAppointment = dataAppointment.getAll(save.getEspeciality());
-				dto = new ClerkDto(save,departmentDto,dtoAppointment);
-			}else if(document == data.getCpf()) {
+				System.out.println("DADA" +dtoAppointment);
+				//dto = new ClerkDto(save,departmentDto,dtoAppointment);
+			}else if(document != null) {
 				throw new BusinessExceptio("Clerk already exist");
 			}
 										
 		}catch(Exception e) {
 			System.out.print(e);
 		}
+		System.out.print("DTO" +dto);
 		
 		return dto;
-		
 	}
 	/*
 	public ClerkDto save(ClerkSave data) {
