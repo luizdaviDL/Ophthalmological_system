@@ -38,43 +38,46 @@ public class ClerkService {
 	public ClerkDto save(ClerkSave data) {
 		ClerkDto dto = null; 
 		Clerk save = null;
+		List<Appointment> appointments = null;
+		
 		Optional<Department> department = DepartmenRepositoty.findById(data.getDepartment());
 		String document = components.findDocument(data.getCpf());
 		System.out.println("Documento: " + document);
 		try {
 			if(document == null) {
 				if(data.getEspeciality() !=null && department.isPresent()) {
-					List<Appointment> appointments = dataAppointment.getAppointments(data.getEspeciality());
+					/*List<Appointment>*/ appointments = dataAppointment.getAppointments(data.getEspeciality());
 					if(appointments !=null) {					
 						Clerk entity = components.clerkData(data, department.get(), appointments);		
 						save = repository.save(entity);																	
 					}
 				}else if(data.getEspeciality() ==null && department.isPresent()) {
 					Clerk clerkToEntity = components.clerkData(data,department.get());					
-					//save = repository.save(clerkToEntity);
+					save = repository.save(clerkToEntity);//essa
 													
 				}else {
 					throw new BusinessExceptio("Erro in the process");
 				}
 				
 				if(department.get().getId().equals(data.getDepartment())) {
-					department.get().getClerk().add(save);
+					department.get().setClerk(save); 
 					DepartmenRepositoty.save(department.get());
 				}else {
 					throw new BusinessExceptio("Erro to add clerck to list");
 				}
 				DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
-				List<AppointmentDto> dtoAppointment = dataAppointment.getAll(save.getEspeciality());
+							
+				List<AppointmentDto> dtoAppointment = dataAppointment.getAll(appointments);
 				System.out.println("DADA" +dtoAppointment);
-				//dto = new ClerkDto(save,departmentDto,dtoAppointment);
-			}else if(document != null) {
-				throw new BusinessExceptio("Clerk already exist");
+				dto = new ClerkDto(save,departmentDto,dtoAppointment);//esssa 
+			}else if(document != null) { 
+				throw new BusinessExceptio("Clerk already exist"); 
 			}
 										
 		}catch(Exception e) {
 			System.out.print(e);
 		}
-		System.out.print("DTO" +dto);
+		System.out.print("DTO" +dto); 
 		
 		return dto;
 	}

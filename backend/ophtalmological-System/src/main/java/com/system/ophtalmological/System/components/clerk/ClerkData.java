@@ -82,7 +82,8 @@ public class ClerkData {
 			toData = mapper.map(data, Clerk.class);
 			toData.setDepartment(department);	
 			toData.getEspeciality().addAll(appointments);
-			setEspecialityF(appointments, toData);
+			//toData.getEspeciality().addAll(appointments);
+			//setEspecialityF(appointments, toData);
 				
 		}catch(Exception e){
 			System.out.print(e);

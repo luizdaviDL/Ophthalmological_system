@@ -25,9 +25,9 @@ public class Clerk extends Person{
 	
 	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-    		name = "clerk_especiality",
-            joinColumns = @JoinColumn(name = "clerk_id"),
-            inverseJoinColumns = @JoinColumn(name = "especiality_id"))
+        name = "clerk_especiality",
+        joinColumns = @JoinColumn(name = "clerk_id"),
+        inverseJoinColumns = @JoinColumn(name = "especiality_id"))
 	private List<Appointment> especiality;
 	
 	public Clerk(String fullname, String cpf, String rg, String email, String matherName,

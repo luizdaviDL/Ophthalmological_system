@@ -36,8 +36,8 @@ public class Department {
 		super();
 	}
 
-	public void setClerk(List<Clerk> clerks) {
-		this.clerk.addAll(clerks);
+	public void setClerk(Clerk clerks) {
+		this.clerk.add(clerks);
 	}
 
 	
