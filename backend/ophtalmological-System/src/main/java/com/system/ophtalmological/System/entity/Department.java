@@ -2,6 +2,7 @@ package com.system.ophtalmological.System.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.system.ophtalmological.System.components.clerk.ClerkDto;
 
@@ -45,4 +46,22 @@ public class Department {
 		clerk.removeIf(clerk -> clerk.getId().equals(data));
 	}
 	
+	public Clerk findClerk(Long id) {
+		return clerk.stream()
+		.filter(value-> value.getId().equals(id)).findFirst()
+		.orElse(null);		
+	}
+	
+	public void setDepartment(Long id, Department department) {
+	    Optional<Clerk> optionalClerk = clerk.stream()
+	            .filter(value -> value.getId().equals(id))
+	            .findFirst();
+
+	    if (optionalClerk.isPresent()) {
+	        Clerk user = optionalClerk.get();
+	        user.setDepartment(department);
+	       //return user;
+	    } 
+	}
+
 }

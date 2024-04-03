@@ -25,12 +25,20 @@ public class AppointmentData {
 
 
 	public List<AppointmentDto> getAll(List<Appointment> get){
-		List<AppointmentDto> listAp = new ArrayList<>();
-		get.forEach(i ->{
-			AppointmentDto dto = new AppointmentDto(i);
-			listAp.add(dto);
-		});
-		return listAp;
+		try {
+			List<AppointmentDto> listAp = new ArrayList<>();
+			
+			get.forEach(i ->{
+				System.out.println("Nome "+i.getName());
+				System.out.println("Id "+ i.getId());
+				AppointmentDto dto = new AppointmentDto(i);
+				listAp.add(dto);
+			});
+			return listAp;
+		}catch(Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 	
 	public List<Appointment> getAppointments(List<Long> list){
@@ -43,7 +51,7 @@ public class AppointmentData {
 				}
 			});
 		}catch(Exception e) {
-			System.out.print(e);
+			return null;
 		}		
 		return listAp;
 	}

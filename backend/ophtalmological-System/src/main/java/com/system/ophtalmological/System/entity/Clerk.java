@@ -2,6 +2,8 @@ package com.system.ophtalmological.System.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -38,6 +40,7 @@ public class Clerk extends Person{
 	public Clerk() {
 		super();
 	}
-
+	
+	
 	
 }

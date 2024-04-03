@@ -24,7 +24,6 @@ public class Appointment {
 	@ManyToMany(mappedBy = "especiality")
 	private List<Clerk> doctors = new ArrayList<>();
 	
-	
 
 	public Appointment() {
 		super();
@@ -36,7 +35,12 @@ public class Appointment {
 		this.name = name;
 	}
 	
-	
+	public Clerk findClerk(Long id) {
+		return doctors.stream()
+		.filter(value-> value.getId().equals(id)).findFirst()
+		.orElse(null);
+				
+	}
 	
 	
 	

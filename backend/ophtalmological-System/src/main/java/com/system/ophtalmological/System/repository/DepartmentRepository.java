@@ -1,5 +1,6 @@
 package com.system.ophtalmological.System.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,9 @@ public interface DepartmentRepository extends JpaRepository<Department, Long>{
 
 	Optional<Department> findByName(String name);
 
-	Optional<Department> findAllById(Long department);	
+	Optional<Department> findAllById(Long department);
+
+	List<Department> findByClerkId(Long clerkId);
+
 
 }

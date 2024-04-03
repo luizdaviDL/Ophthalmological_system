@@ -37,88 +37,49 @@ public class ClerkService {
 
 	public ClerkDto save(ClerkSave data) {
 		ClerkDto dto = null; 
-		Clerk save = null;
-		List<Appointment> appointments = null;
+		Clerk save = null; 
 		
+		//List<Appointment> appointments = dataAppointment.getAppointments(data.getEspeciality());		
 		Optional<Department> department = DepartmenRepositoty.findById(data.getDepartment());
-		String document = components.findDocument(data.getCpf());
-		System.out.println("Documento: " + document);
+		String document = components.findDocument(data.getCpf());		
 		try {
-			if(document == null) {
-				if(data.getEspeciality() !=null && department.isPresent()) {
-					/*List<Appointment>*/ appointments = dataAppointment.getAppointments(data.getEspeciality());
-					if(appointments !=null) {					
-						Clerk entity = components.clerkData(data, department.get(), appointments);		
-						save = repository.save(entity);																	
-					}
-				}else if(data.getEspeciality() ==null && department.isPresent()) {
-					Clerk clerkToEntity = components.clerkData(data,department.get());					
-					save = repository.save(clerkToEntity);//essa
-													
+			if(document == null) {			
+				if(department.isPresent()) {
+					save = components.saveClerk(data, department.get());
+					List<Appointment> appointments = dataAppointment.getAppointments(data.getEspeciality());
+					DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
+					List<AppointmentDto> dtoAppointment = dataAppointment.getAll(appointments); /*save.getEspeciality()*/
+					dto = new ClerkDto(save,departmentDto,dtoAppointment);
 				}else {
 					throw new BusinessExceptio("Erro in the process");
-				}
-				
-				if(department.get().getId().equals(data.getDepartment())) {
-					department.get().setClerk(save); 
-					DepartmenRepositoty.save(department.get());
-				}else {
-					throw new BusinessExceptio("Erro to add clerck to list");
-				}
-				DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
-							
-				List<AppointmentDto> dtoAppointment = dataAppointment.getAll(appointments);
-				System.out.println("DADA" +dtoAppointment);
-				dto = new ClerkDto(save,departmentDto,dtoAppointment);//esssa 
+				}				
 			}else if(document != null) { 
 				throw new BusinessExceptio("Clerk already exist"); 
 			}
 										
-		}catch(Exception e) {
-			System.out.print(e);
+		}catch(Exception e) {	
+			System.out.println(e);
+			return null;
 		}
-		System.out.print("DTO" +dto); 
 		
 		return dto;
 	}
-	/*
-	public ClerkDto save(ClerkSave data) {
-		ClerkDto dto = null; 
-		Optional<Department> department = DepartmenRepositoty.findById(data.getDepartment());
-		try {
-			if(department.isPresent()){
-				Clerk clerkToEntity = components.clerkData(data,department.get());
-				Clerk save = repository.save(clerkToEntity);
-				if(department.get().getId().equals(data.getDepartment())) {
-					department.get().getClerk().add(save);
-					DepartmenRepositoty.save(department.get());
-				}else {
-					throw new BusinessExceptio("Erro to add clerck to list");
-				}
-				DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
-				dto = new ClerkDto(save,departmentDto);
-			}else {
-				throw new BusinessExceptio("This dapartment not exist");
-			}
-		}catch(Exception e) {
-			System.out.print(e);
-		}
-		
-		return dto;
-	}*/
 	
 	public List<ClerkDto> getAll() {
 		List<Clerk> clerks =  repository.findAll();
 		List<ClerkDto> list = components.clerksDto(clerks);
-		return list;
+		return list; 
 	}
 
 	public ClerkDto getDocument(ClerkDocument data) {
+		System.out.println("Documento" +data.getCpf()); 
 		ClerkDto dto = null; 	
-		Clerk fingDocument = components.findDocument(data.getCpf());
-		if(fingDocument!=null) {
-			DepartmentDto departmentDto = new DepartmentDto(fingDocument.getDepartment());
-			dto = new ClerkDto(fingDocument,departmentDto);
+		//String document = components.findDocument(data.getCpf());
+		Optional<Clerk> fingDocument = repository.findByCpf(data.getCpf());		
+		if(fingDocument.isPresent()) {			
+			DepartmentDto departmentDto = new DepartmentDto(fingDocument.get().getDepartment());
+			List<AppointmentDto> dtoAppointment = dataAppointment.getAll(fingDocument.get().getEspeciality());
+			dto = new ClerkDto(fingDocument.get(),departmentDto,dtoAppointment);
 		}else {
 			throw new BusinessExceptio("This clerck not exist");
 		}
@@ -126,18 +87,26 @@ public class ClerkService {
 	}
 
 	public ClerkDto updateClerck(ClerkSave data) {
+		Clerk save = null; 		
 		ClerkDto dto = null; 
 		try {
+
+			List<Appointment> appointments = dataAppointment.getAppointments(data.getEspeciality());
 			Optional<Clerk> getId = repository.findById(data.getId());
 			Optional<Department> department = DepartmenRepositoty.findAllById(data.getDepartment());
 			if(getId.isPresent() && department.isPresent()) {			
-				Clerk clerkToEntity = components.clerkData(data,department.get());
-				Clerk save = repository.save(clerkToEntity);
-				DepartmentDto departmentDto = new DepartmentDto(save.getDepartment());
-				dto = new ClerkDto(save,departmentDto);
-			}
+				save = components.saveClerk(data, department.get());
+				DepartmentDto departmentDto = new DepartmentDto(department.get());
+				//List<Appointment> appointments = dataAppointment.getAppointments(data.getEspeciality());
+				List<AppointmentDto> dtoAppointment = dataAppointment.getAll(appointments);///save.getEspeciality(
+				dto = new ClerkDto(save,departmentDto,dtoAppointment);
+			}else {
+				throw new BusinessExceptio("Clerk or Department not exist");
+			}	
+			
 		}catch(Exception e) {
 			System.out.print(e);
+			throw new BusinessExceptio("Erro:"+e);
 		}
 		
 		return dto;
@@ -150,8 +119,12 @@ public class ClerkService {
 				Optional<Department> department = DepartmenRepositoty.findById(getId.get().getDepartment().getId());
 				if(department.isPresent()) {
 					try {
-						department.get().removeClerck(getId.get().getId());
-						repository.deleteById(data.getId());
+						if (department != null) {
+					        department.get().removeClerck(getId.get().getId());
+					        DepartmenRepositoty.save(department.get()); // Persiste a remoção da referência no banco de dados
+					    }
+
+					    repository.deleteById(data.getId());
 					}catch(Exception e) {
 						System.out.print(e);
 					}

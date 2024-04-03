@@ -12,19 +12,26 @@ import org.springframework.stereotype.Component;
 
 import com.system.ophtalmological.System.components.Department.DepartmentDto;
 import com.system.ophtalmological.System.components.appointment.AppointmentData;
+import com.system.ophtalmological.System.components.appointment.AppointmentDto;
 import com.system.ophtalmological.System.entity.Appointment;
 import com.system.ophtalmological.System.entity.Clerk;
 import com.system.ophtalmological.System.entity.Department;
 import com.system.ophtalmological.System.repository.AppointmentRepository;
 import com.system.ophtalmological.System.repository.ClerckRepository;
+import com.system.ophtalmological.System.repository.DepartmentRepository;
 
 @Component
 public class ClerkData {
 	
 	@Autowired
 	private ModelMapper mapper;
+	
 	@Autowired
 	public ClerckRepository repository;
+	@Autowired
+	public AppointmentData dataAppointment;
+	@Autowired	
+	public DepartmentRepository DepartmenRepositoty;
 	@Autowired
 	public AppointmentRepository appointmentRepository;
 	
@@ -36,19 +43,35 @@ public class ClerkData {
 			toData.setDepartment(data.getDepartment());
 			toData.getEspeciality().addAll(data.getEspeciality());
 		}catch(Exception e){
-			System.out.print(e);
+			return null;
 		}
 		
 		return toData;
 	}
 	
 	
+	public Clerk clerkData(ClerkSave data, Department department, List<Appointment> appointments) {
+		Clerk toData = null;
+	
+		try {
+			toData = mapper.map(data, Clerk.class);
+			toData.setDepartment(department);
+			toData.getEspeciality().addAll(appointments);			
+		}catch(Exception e){
+			return null;
+		}
+		
+		return toData;
+	}
+	 
+	
 	public List<ClerkDto> clerksDto(List<Clerk> data){
 		List<ClerkDto> listClerk = new ArrayList<>();
 		try {			
 			data.stream().forEach(i ->{
 				DepartmentDto departmentDto = new DepartmentDto(i.getDepartment());
-				ClerkDto dto = new ClerkDto(i,departmentDto);
+				List<AppointmentDto> dtoAppointment = dataAppointment.getAll(i.getEspeciality());
+				ClerkDto dto = new ClerkDto(i,departmentDto,dtoAppointment);
 				listClerk.add(dto);
 			});
 		}catch(Exception e) {			
@@ -73,24 +96,6 @@ public class ClerkData {
 		return value;
 	}
 
-	
-	public Clerk clerkData(ClerkSave data, Department department, List<Appointment> appointments) {
-		Clerk toData = null;
-		Set<Appointment> list = new HashSet<>();
-		
-		try {
-			toData = mapper.map(data, Clerk.class);
-			toData.setDepartment(department);	
-			toData.getEspeciality().addAll(appointments);
-			//toData.getEspeciality().addAll(appointments);
-			//setEspecialityF(appointments, toData);
-				
-		}catch(Exception e){
-			System.out.print(e);
-		}
-		
-		return toData;
-	}
 
 	public Clerk clerkData(ClerkSave data, Department department) {
 		Clerk toData = null;
@@ -113,6 +118,61 @@ public class ClerkData {
 			}
 		});
 	}
+		
+	public Clerk saveClerk(ClerkSave data, Department department) {
+		Clerk save = null;
+		
+		List<Appointment> appointments = dataAppointment.getAppointments(data.getEspeciality());
+		
+		if(data.getEspeciality() !=null && data.getId()==null) {
+			
+			Clerk entity = clerkData(data, department, appointments);		
+			save = repository.save(entity);	
+			department.setClerk(save);
+			DepartmenRepositoty.save(department);
+		
+			//department dont update on database
+		}else if(data.getEspeciality() !=null && data.getId()!=null){
+			Optional<Clerk> getId = repository.findById(data.getId());
+			if(appointments !=null && getId.get().getDepartment().getId() != department.getId()){
+				Clerk entity = clerkData(data, department, appointments);				
+				save = repository.save(entity);	
+				department.setDepartment(save.getId(),department);
+				DepartmenRepositoty.save(department);
+				//DepartmenRepositoty.save(save.getDepartment());				
+			}
+			else if(appointments !=null && getId.get().getDepartment().getId().equals(department.getId())){
+				Clerk entity = clerkData(data, department, appointments);		
+				save = repository.save(entity);
+				
+			}
+		}
+		return save;
+	}
+	
+	public ClerkDto saveDepartment_Appointment(Department department, Clerk clerk) {
+		
+		ClerkDto dto = null; 		
+		Clerk findClerk = department.findClerk(clerk.getId());
+		if(findClerk==null) {
+			department.setClerk(clerk); 
+			DepartmenRepositoty.save(department);
+		}
+		
+		clerk.getEspeciality().stream()
+		.forEach(value -> clerk.getEspeciality().add(value));
+		
+		DepartmentDto departmentDto = new DepartmentDto(clerk.getDepartment());
+		
+		List<AppointmentDto> dtoAppointment = dataAppointment.getAll(clerk.getEspeciality());
+		if(dtoAppointment !=null) {
+			dto = new ClerkDto(clerk,departmentDto,dtoAppointment);
+		}
+		dto = new ClerkDto(clerk,departmentDto);
+		return dto;
+	}
+	
+	
 /*
 	public Set<Appointment> createInstanteAppointment(List<Appointment> data) {
 		Set<Appointment> result = new HashSet<>();
