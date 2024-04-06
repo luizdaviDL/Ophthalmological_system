@@ -21,6 +21,8 @@ import com.system.ophtalmological.System.repository.AppointmentRepository;
 import com.system.ophtalmological.System.repository.ClerckRepository;
 import com.system.ophtalmological.System.repository.DepartmentRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ClerkService {
 	
@@ -112,6 +114,7 @@ public class ClerkService {
 		return dto;
 	}
 
+	@Transactional
 	public List<ClerkDto> deleteClerck(ClerkSave data) {
 		try {
 			Optional<Clerk> getId = repository.findById(data.getId());
@@ -119,12 +122,12 @@ public class ClerkService {
 				Optional<Department> department = DepartmenRepositoty.findById(getId.get().getDepartment().getId());
 				if(department.isPresent()) {
 					try {
-						if (department != null) {
-					        department.get().removeClerck(getId.get().getId());
-					        DepartmenRepositoty.save(department.get()); // Persiste a remoção da referência no banco de dados
+						if (department != null) {//&& department.get().getId().equals(getId.get().getId())
+							repository.deleteClerkFromDepartment(getId.get().getId(), department.get().getId());
+							
 					    }
-
-					    repository.deleteById(data.getId());
+						repository.deleteById(getId.get().getId());
+					    
 					}catch(Exception e) {
 						System.out.print(e);
 					}
