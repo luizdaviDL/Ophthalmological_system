@@ -17,6 +17,11 @@ public interface ClerckRepository extends JpaRepository<Clerk, Long>{
 
 	Optional<Clerk> findByCpf (String cpf);
 	@Modifying
+	@Query(value = "delete from clerk_especiality where clerk_id = :clerkId and especiality_id = :spId", nativeQuery = true)
+	void deleteCLerckFromEspeciality(long clerkId, long spId);
+	@Modifying
     @Query(value = "DELETE FROM department_clerk where department_id = :dpId AND clerk_id = :clerkId", nativeQuery = true)
 	void deleteClerkFromDepartment(long clerkId, long dpId);
+	
+	
 }

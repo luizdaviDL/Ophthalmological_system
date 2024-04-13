@@ -55,6 +55,19 @@ public class AppointmentData {
 		}		
 		return listAp;
 	}
-
+	public List<Appointment> getAppointmentL(List<Appointment> list){
+		List<Appointment> listAp = new ArrayList<>();
+		try {			
+			list.forEach(i ->{
+				Optional<Appointment> result = repositoryAppointment.findById(i.getId());
+				if(result.isPresent()) {
+					listAp.add(result.get());
+				}
+			});
+		}catch(Exception e) {
+			return null;
+		}		
+		return listAp;
+	}
 	
 }

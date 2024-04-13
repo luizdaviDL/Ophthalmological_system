@@ -117,17 +117,22 @@ public class ClerkService {
 	@Transactional
 	public List<ClerkDto> deleteClerck(ClerkSave data) {
 		try {
+			Appointment app = new Appointment();
 			Optional<Clerk> getId = repository.findById(data.getId());
 			if(getId.isPresent()) {
 				Optional<Department> department = DepartmenRepositoty.findById(getId.get().getDepartment().getId());
+				List<Appointment> appointments = dataAppointment.getAppointmentL(getId.get().getEspeciality());
 				if(department.isPresent()) {
 					try {
-						if (department != null) {//&& department.get().getId().equals(getId.get().getId())
-							repository.deleteClerkFromDepartment(getId.get().getId(), department.get().getId());
-							
-					    }
+						
+						repository.deleteClerkFromDepartment(getId.get().getId(), department.get().getId());
+						if(appointments.size()>0) {
+							appointments.forEach(i->{
+								repository.deleteCLerckFromEspeciality(getId.get().getId(), i.getId());
+							});
+						}
 						repository.deleteById(getId.get().getId());
-					    
+								
 					}catch(Exception e) {
 						System.out.print(e);
 					}
