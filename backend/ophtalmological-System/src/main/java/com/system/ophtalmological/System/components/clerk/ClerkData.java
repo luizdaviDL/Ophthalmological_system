@@ -54,10 +54,10 @@ public class ClerkData {
 		Clerk toData = null;
 	
 		try {
-			toData = mapper.map(data, Clerk.class);
-			toData.setDepartment(department);
-			toData.getEspeciality().addAll(appointments);			
+			toData = new Clerk(data, department,appointments);
+				
 		}catch(Exception e){
+			System.out.println(e);
 			return null;
 		}
 		
@@ -124,24 +124,25 @@ public class ClerkData {
 		
 		List<Appointment> appointments = dataAppointment.getAppointments(data.getEspeciality());
 		
-		if(data.getEspeciality() !=null && data.getId()==null) {
+		if(appointments !=null || appointments ==null && data.getId()==null) {
 			
-			Clerk entity = clerkData(data, department, appointments);		
-			save = repository.save(entity);	
-			department.setClerk(save);
+			Clerk entity = clerkData(data, department, appointments);	
+			entity.setDtype("Clerk");
+			save = repository.save(entity);				
 			DepartmenRepositoty.save(department);
 		
-			//department dont update on database
-		}else if(data.getEspeciality() !=null && data.getId()!=null){
+			//department dont update in database
+		}else if(appointments !=null || appointments ==null  && data.getId()!=null){
 			Optional<Clerk> getId = repository.findById(data.getId());
-			if(appointments !=null && getId.get().getDepartment().getId() != department.getId()){
-				Clerk entity = clerkData(data, department, appointments);				
+			if(getId.get().getDepartment().getId() != department.getId()){
+				Clerk entity = clerkData(data, department, appointments);
+				entity.setDtype("Clerk");
 				save = repository.save(entity);	
 				department.setDepartment(save.getId(),department);
 				DepartmenRepositoty.save(department);
 				//DepartmenRepositoty.save(save.getDepartment());				
 			}
-			else if(appointments !=null && getId.get().getDepartment().getId().equals(department.getId())){
+			else if(appointments !=null || appointments ==null && getId.get().getDepartment().getId().equals(department.getId())){
 				Clerk entity = clerkData(data, department, appointments);		
 				save = repository.save(entity);
 				

@@ -20,7 +20,7 @@ public class Patient extends Person{
 	
 	private LocalDate redisterDate = LocalDate.now();
 	@OneToMany
-	private List<MediclaReport> medicalHistory = new ArrayList<>();
+	private List<MedicalReport> medicalHistory = new ArrayList<>();
 	@OneToMany
 	private List<Diary> diary= new ArrayList<>();
 	
@@ -28,7 +28,7 @@ public class Patient extends Person{
 		super();
 	}
 	public Patient(String fullname, String cpf, String rg, String email, String matherName,
-			String fatherName, String birthDate, LocalDate redisterDate, List<MediclaReport> medicalHistory,
+			String fatherName, String birthDate, LocalDate redisterDate, List<MedicalReport> medicalHistory,
 			List<Diary> diary) {
 		super(fullname, cpf, rg, email, matherName, fatherName, birthDate);
 		this.redisterDate = redisterDate;

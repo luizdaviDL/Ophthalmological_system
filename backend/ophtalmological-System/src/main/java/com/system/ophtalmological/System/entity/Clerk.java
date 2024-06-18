@@ -1,8 +1,9 @@
 package com.system.ophtalmological.System.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.Cascade;
+import com.system.ophtalmological.System.components.clerk.ClerkSave;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -31,6 +32,9 @@ public class Clerk extends Person{
         joinColumns = @JoinColumn(name = "clerk_id"),
         inverseJoinColumns = @JoinColumn(name = "especiality_id"))
 	private List<Appointment> especiality;
+
+
+	private String dtype;
 	
 	public Clerk(String fullname, String cpf, String rg, String email, String matherName,
 			String fatherName, String birthDate) {
@@ -40,6 +44,20 @@ public class Clerk extends Person{
 	public Clerk() {
 		super();
 	}
+
+	public Clerk(ClerkSave data ,Department department, List<Appointment> especiality) {
+		super(data.getFullname(), data.getCpf(), data.getRg(), data.getEmail(), data.getMatherName(), data.getFatherName(),data.getBirthDate());
+		this.especiality = new ArrayList<>();
+		this.department = department;
+		if(especiality!=null) {
+			this.especiality.addAll(especiality);
+		}
+	}
+
+	public void setDtype(String string) {
+	    this.dtype = string;
+	}
+
 	
 	
 	

@@ -12,7 +12,6 @@ import com.system.ophtalmological.System.components.appointment.AppointmentDto;
 import com.system.ophtalmological.System.components.appointment.AppointmentDtoDoctor;
 import com.system.ophtalmological.System.components.appointment.AppointmentSave;
 import com.system.ophtalmological.System.entity.Appointment;
-import com.system.ophtalmological.System.entity.Doctor;
 import com.system.ophtalmological.System.repository.AppointmentRepository;
 
 @Service
@@ -22,8 +21,6 @@ public class Appointmentservice {
 	@Autowired
 	private AppointmentData dataClass;
 
-	@Autowired
-	private AppointmentData appointmentData;
 	
 	//save
 	public AppointmentDto saveAppointment(AppointmentSave data) {

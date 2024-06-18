@@ -2,6 +2,7 @@ package com.system.ophtalmological.System.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,12 +27,22 @@ public class Diary {
 	private Appointment appointment; //consulta
 	@ManyToOne
 	private Clerk doctor;
-	private LocalDate date;
-	private LocalTime time;
-	@ManyToOne
-	private Status status;
-	public Diary(Long id, Patient patient, Appointment appointment, Clerk doctor, LocalDate date, LocalTime time,
-			Status status) {
+	private Date date;
+	private LocalTime time;	
+	private boolean status;
+	
+	public Diary(Patient patient, Appointment appointment, Clerk doctor, Date date, LocalTime time) {
+		super();
+		this.patient = patient;
+		this.appointment = appointment;
+		this.doctor = doctor;
+		this.date = date;
+		this.time = time;
+		this.status = true;
+	}
+
+	public Diary(Long id, Patient patient, Appointment appointment, Clerk doctor, Date date, LocalTime time,
+			boolean status) {
 		super();
 		this.id = id;
 		this.patient = patient;
@@ -41,6 +52,12 @@ public class Diary {
 		this.time = time;
 		this.status = status;
 	}
+
+	public Diary() {
+		super();
+	}
 	
+	
+
 	
 }

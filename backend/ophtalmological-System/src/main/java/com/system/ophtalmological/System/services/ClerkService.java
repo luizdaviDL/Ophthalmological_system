@@ -55,7 +55,7 @@ public class ClerkService {
 				}else {
 					throw new BusinessExceptio("Erro in the process");
 				}				
-			}else if(document != null) { 
+			}else{ 
 				throw new BusinessExceptio("Clerk already exist"); 
 			}
 										
