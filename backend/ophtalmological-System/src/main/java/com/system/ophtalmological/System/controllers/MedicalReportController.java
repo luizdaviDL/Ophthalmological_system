@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.system.ophtalmological.System.components.medicalReport.MedicalReportDto;
 import com.system.ophtalmological.System.components.medicalReport.saveMR;
+import com.system.ophtalmological.System.components.patients.SavePatientDto;
 import com.system.ophtalmological.System.services.MedicalReportService;
 
 @RestController
@@ -39,6 +40,12 @@ public class MedicalReportController {
 	public ResponseEntity<List<MedicalReportDto>> getAll() {
 		List<MedicalReportDto> savingMr = service.getAll();
 		return ResponseEntity.status(HttpStatus.CREATED).body(savingMr);			
+	}
+	
+	@GetMapping(value="/patient")
+	public ResponseEntity<List<MedicalReportDto>> getByPatient(@RequestBody SavePatientDto data) {
+		List<MedicalReportDto> patient = service.getByPatient(data);
+		return ResponseEntity.status(HttpStatus.CREATED).body(patient);			
 	}
 	
 	@DeleteMapping(value="/deletedocment")

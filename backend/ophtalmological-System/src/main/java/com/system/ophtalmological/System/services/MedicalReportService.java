@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.system.ophtalmological.System.components.BusinessExceptio;
+import com.system.ophtalmological.System.components.Department.DepartmentDto;
 import com.system.ophtalmological.System.components.clerk.ClerkDto;
 import com.system.ophtalmological.System.components.medicalReport.MedicalReportData;
 import com.system.ophtalmological.System.components.medicalReport.MedicalReportDto;
 import com.system.ophtalmological.System.components.medicalReport.saveMR;
 import com.system.ophtalmological.System.components.patients.PatientDto;
+import com.system.ophtalmological.System.components.patients.SavePatientDto;
 import com.system.ophtalmological.System.components.report.ReportDto;
 import com.system.ophtalmological.System.entity.Clerk;
 import com.system.ophtalmological.System.entity.MedicalReport;
@@ -55,10 +57,11 @@ public class MedicalReportService {
 						}
 						savemr = reportdata.saving(report.get(),patient.get(),clerck.get(), data.getDocument(), data.getDocumentPdf());
 						MedicalReport database = medicalrepository.save(savemr);
+						DepartmentDto departmentDto = new DepartmentDto(clerck.get().getDepartment());
 						
 						ReportDto reportdto = new ReportDto(database.getReport());
 						PatientDto patientdto = new PatientDto(database.getPatient());
-						ClerkDto clerckdto = new ClerkDto(database.getDoctor());
+						ClerkDto clerckdto = new ClerkDto(database.getDoctor(),departmentDto);
 						dto = new MedicalReportDto(database.getId(), reportdto,patientdto,clerckdto);			
 					}else {
 						throw new BusinessExceptio("Erro in the process");
@@ -75,10 +78,11 @@ public class MedicalReportService {
 				
 				savemr = reportdata.saving(report.get(),patient.get(),clerck.get(), data.getDocument(), data.getDocumentPdf());
 				MedicalReport database = medicalrepository.save(savemr);
+				DepartmentDto departmentDto = new DepartmentDto(clerck.get().getDepartment());
 				
 				ReportDto reportdto = new ReportDto(database.getReport());
 				PatientDto patientdto = new PatientDto(database.getPatient());
-				ClerkDto clerckdto = new ClerkDto(database.getDoctor());
+				ClerkDto clerckdto = new ClerkDto(database.getDoctor(),departmentDto);
 				dto = new MedicalReportDto(database.getId(), reportdto,patientdto,clerckdto);			
 			}else {
 				throw new BusinessExceptio("Erro in the process");
@@ -97,7 +101,9 @@ public class MedicalReportService {
 				all.stream().forEach(i ->{
 					ReportDto reportdto = new ReportDto(i.getReport());
 					PatientDto patientdto = new PatientDto(i.getPatient());
-					ClerkDto clerckdto = new ClerkDto(i.getDoctor());
+					
+					DepartmentDto departmentDto = new DepartmentDto(i.getDoctor().getDepartment());
+					ClerkDto clerckdto = new ClerkDto(i.getDoctor(),departmentDto);
 					MedicalReportDto dto = new MedicalReportDto(i.getId(),reportdto,patientdto,clerckdto);	
 					list.add(dto);
 				});
@@ -132,6 +138,75 @@ public class MedicalReportService {
 			return false;
 		}
 	}
+
+	public List<MedicalReportDto> getByPatient(SavePatientDto data) {
+		List<MedicalReportDto> list=new ArrayList<>();
+		
+		try {
+			Optional<Patient> patient = patientrepository.findByCpf(data.getCpf());
+			
+			if(patient.isPresent()) {
+
+				Long patientid = medicalrepository.getPatient(patient.get().getId());
+				if(patientid!=0) {
+					
+					Long reportId = medicalrepository.getReport(patient.get().getId());
+					Long doctorId = medicalrepository.getDoctor(patient.get().getId());
+				
+					if(reportId !=0 && doctorId !=0) {
+						
+						Optional<Report> report = reportrepository.findById(reportId);	
+						Optional<Clerk> clerck = clerkrepository.findById(doctorId);
+						List<Long> medicalReportId = medicalrepository.getMedicalReport(patient.get().getId());
+						
+						if(medicalReportId.size() >1) {
+							
+							List<Object[]> dataPatient = medicalrepository.selectDataPatient(patient.get().getId());
+							dataPatient.forEach(i ->{
+								Long idMedical = (Long) i[0];
+								Long reportid = (Long) i[1];
+								Long patientId = (Long) i[2];
+								Long doctorid= (Long) i[3];
+								
+								Optional<Report> elementR = reportrepository.findById(reportid);
+								Optional<Patient> elementP = patientrepository.findById(patientId);
+								Optional<Clerk> elementC = clerkrepository.findById(doctorid);
+								
+								ReportDto reportdto = new ReportDto(elementR.get());
+								PatientDto patientdto = new PatientDto(elementP.get());
+								ClerkDto clerckdto = new ClerkDto(elementC.get());
+								MedicalReportDto dto = new MedicalReportDto(idMedical,reportdto,patientdto,clerckdto);	
+								list.add(dto);
+							});
+							
+						}else {
+							Long reposrtId = medicalReportId.get(0);
+							ReportDto reportdto = new ReportDto(report.get());
+							PatientDto patientdto = new PatientDto(patient.get());
+							ClerkDto clerckdto = new ClerkDto(clerck.get());
+							MedicalReportDto dto2 = new MedicalReportDto(reposrtId,reportdto,patientdto,clerckdto);
+							list.add(dto2);
+						}
+											
+					}else {
+						throw new BusinessExceptio("Erro to find values");
+					}
+									
+				}else {
+					throw new BusinessExceptio("patient no exist");
+				}
+	
+			}else {
+				throw new BusinessExceptio("Patient not exist");
+			}
+			
+		}catch (Exception e){
+			System.out.print(e);
+			return null;
+		}
+		return list;
+	}
+	
 	
 	
 }

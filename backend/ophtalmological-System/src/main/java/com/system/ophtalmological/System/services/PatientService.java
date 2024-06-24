@@ -28,12 +28,12 @@ public class PatientService {
 		Patient savePa = null;
 		PatientDto paDto = null;
 		Patient paClass = dataClass.patientData(patient);		
-		String paCpf = dataClass.findCpf(paClass.getCpf());
-		if(paCpf == null) {
+		Optional<Patient> entity = repository.findByCpf(paClass.getCpf());
+		if(entity.isEmpty()) {
 			 savePa = repository.save(paClass);
 			 paDto = new PatientDto(savePa);
 			 
-		}else if(paCpf != null) {
+		}else if(entity.isPresent()) {
 			throw new BusinessExceptio("Cpf already exist");
 		}
 		

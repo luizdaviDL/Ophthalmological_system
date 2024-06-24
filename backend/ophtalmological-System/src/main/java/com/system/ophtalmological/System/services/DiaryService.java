@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.system.ophtalmological.System.components.BusinessExceptio;
+import com.system.ophtalmological.System.components.Department.DepartmentDto;
 import com.system.ophtalmological.System.components.appointment.AppointmentDto;
 import com.system.ophtalmological.System.components.clerk.ClerkDto;
 import com.system.ophtalmological.System.components.diary.DiaryDto;
@@ -45,7 +46,7 @@ public class DiaryService {
 		
 		if(data.getId() ==null) {
 			if(patient==null && entityPatient.isPresent() && appointment.isPresent() && clerk.isPresent()) {				
-				Diary result= saveDiary(entityPatient.get(),appointment.get(),clerk.get(),data.getDate(), data.getTime());
+				Diary result= saveDiary(null,entityPatient.get(),appointment.get(),clerk.get(),data.getDate(), data.getTime());
 				dto = savingDto(result.getId(),  result.getPatient(),result.getAppointment(),result.getDoctor(),result.getDate(),result.getTime());				
 			}else if(patient!=null){
 				throw new BusinessExceptio("Pacient already have diary");
@@ -58,7 +59,7 @@ public class DiaryService {
 			Optional<Diary> findiary = repository.findById(data.getId());
 			if(findiary.isPresent()) {
 				if(patient!=null && entityPatient.isPresent() && appointment.isPresent() && clerk.isPresent()) {					
-					Diary result= saveDiary(entityPatient.get(),appointment.get(),clerk.get(),data.getDate(), data.getTime());
+					Diary result= saveDiary(data.getId(),entityPatient.get(),appointment.get(),clerk.get(),data.getDate(), data.getTime());
 					dto = savingDto(result.getId(),  result.getPatient(),result.getAppointment(),result.getDoctor(),result.getDate(),result.getTime());			
 				}else {
 					throw new BusinessExceptio("Erro ao alterar oss dados");
@@ -68,9 +69,15 @@ public class DiaryService {
 		return dto;
 	}
 	
-	private Diary saveDiary(Patient entityPatient, Appointment appointment, Clerk clerk, Date date, LocalTime time) {
-        Diary instance = new Diary(entityPatient, appointment, clerk, date, time);
-        Diary saving = repository.save(instance);
+	private Diary saveDiary(Long id,Patient entityPatient, Appointment appointment, Clerk clerk, Date date, LocalTime time) {
+		Diary saving =null;
+		if(id ==null) {
+        	Diary instance = new Diary(entityPatient, appointment, clerk, date, time);
+        	saving = repository.save(instance);
+        }
+		Diary instance = new Diary(id,entityPatient, appointment, clerk, date, time);
+    	saving = repository.save(instance);
+        
         return saving;
     }
 	
@@ -85,7 +92,7 @@ public class DiaryService {
 	public List<DiaryDto> delete(DiarySave data) {
 		Optional<Diary> findiary = repository.findById(data.getId());
 		if(findiary.isPresent()) {
-			 repository.deleteDiary(data.getId());			 
+			 repository.deleteById(data.getId());				 
 		}		
 		return getAll();		
 	}
@@ -98,7 +105,8 @@ public class DiaryService {
 		allDiary.stream().forEach(i->{		
 			PatientDto patient =new PatientDto(i.getPatient());
 			AppointmentDto appointment = new AppointmentDto(i.getAppointment());
-			ClerkDto clerck = new ClerkDto(i.getDoctor());
+			DepartmentDto department = new DepartmentDto(i.getDoctor().getDepartment());
+			ClerkDto clerck = new ClerkDto(i.getDoctor(),department);
 			
 			DiaryDto instance = new DiaryDto(i.getId(),patient,appointment,clerck, i.getDate(), i.getTime());
 			dto.add(instance);
@@ -106,7 +114,4 @@ public class DiaryService {
 		return dto;
 	}
 	
-	
-	
-		
 }

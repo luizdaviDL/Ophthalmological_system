@@ -24,17 +24,20 @@ public class PatientData {
 		return mapper.map(pa, Patient.class);				
 	}
 	
-	//findCpf
+	//findCp
+	/*
 	public String findCpf(String cpfN) {	
 		String cpf = "";
-		Optional<Patient> cpfFind = repository.findByCpf(cpfN);
-		if(cpfFind.isPresent()) {
-			cpf = cpfFind.get().getCpf();
+		Object cpfFind = repository.findByCpf(cpfN);
+		
+		if(cpfFind!=null) {
+			cpf = (String) cpfFind;
 		}else {
 			cpf = null;
 		}		
 		return cpf;
-	}
+	}*/
+	
 	//getDocument dattas
 	public GetDatasPatient getDatasPatient(String document) {
 		GetDatasPatient datasIsntance =null;		

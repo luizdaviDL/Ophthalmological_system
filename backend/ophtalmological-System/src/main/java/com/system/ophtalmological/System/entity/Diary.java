@@ -56,6 +56,17 @@ public class Diary {
 	public Diary() {
 		super();
 	}
+
+	public Diary(Long id, Patient patient, Appointment appointment, Clerk doctor, Date date, LocalTime time) {
+		super();
+		this.id = id;
+		this.patient = patient;
+		this.appointment = appointment;
+		this.doctor = doctor;
+		this.date = date;
+		this.time = time;
+		this.status = true;
+	}
 	
 	
 
