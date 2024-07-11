@@ -1,0 +1,71 @@
+.containerP{
+    background-color: #ffffff;
+    display: flex;
+    height: 3.30rem;
+    width: 50rem;
+    box-shadow: 0 8px 3px rgba(0, 0, 0, 0.1);;
+}
+
+.containerP .icons button img{
+    width: 1rem;
+    height: 1rem;
+}
+
+.containerP .icons button{
+    height: 2rem;
+    margin-top: .70rem;
+    background-color: white;
+    border: none;
+    margin-left: .1rem;
+    border-radius: .50rem;
+}
+
+.containerP .icons .edit:hover{
+    border: .1rem solid rgb(95, 94, 94);
+    transition: .1s;
+}
+
+.containerP .icons .delete:hover{
+    border: .1rem solid rgb(95, 94, 94);
+    transition: .1s;
+}
+
+.containerP .icons {
+    display: flex;
+    margin-left: 0rem;
+}
+
+.containerP .id{
+    margin-left: .80rem;
+    width: 2rem;
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.containerP .name{
+    width: 15rem;
+    margin-right: 1rem;
+    text-align: center;
+
+}
+
+.containerP .birthDate{
+    width: 6rem;
+    margin-right: 1rem;
+    text-align: center;
+
+}
+
+.containerP .documentshort{
+    width: 6rem;
+    margin-right: 2rem;
+    text-align: center;
+
+}
+
+.containerP .documentLong{
+    width: 8rem;
+    margin-right: 2rem;
+    text-align: center;
+
+}

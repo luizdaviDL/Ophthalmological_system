@@ -1,0 +1,46 @@
+.containerPn{
+    background-color: #135048;
+    display: flex;
+    height: 3rem;
+    width: 50rem;
+    margin-bottom: 1rem;
+}
+
+.containerPn .id{
+    margin-left: 1.30rem;
+    margin-right: 2rem;
+    color: white;
+    height: 2rem;
+}
+
+.containerPn .name{
+    margin-left: 4rem;
+    color: white;
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerPn .birthDate{
+    margin-left: 5.40rem;
+    color: white;
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerPn .document1{
+    margin-left: 1rem;
+    color: white;
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerPn .document2{
+    margin-left: 3rem;
+    color: white;
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}

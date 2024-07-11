@@ -1,0 +1,40 @@
+
+.containerValuesB{
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.containerValuesB .name{
+    height: 2.60rem;
+    background-color: white;
+    margin-left: .50rem;
+    margin-right: 2rem;
+    width: 13rem;
+    text-align: center;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+    border-radius: .30rem;
+    border-radius: .30rem;
+}
+
+.containerValuesB .email{
+    height: 2.60rem;
+    background-color: white;
+    margin-left: .50rem;
+    margin-right: 2rem;
+    width: 16rem;
+    text-align: center;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+    border-radius: .30rem;
+}
+
+.containerValuesB .document{
+    height: 2.60rem;
+    background-color: white;
+    margin-left: .50rem;
+    margin-right: 2rem;
+    width: 7rem;
+    text-align: center;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+    border-radius: .30rem;
+
+}

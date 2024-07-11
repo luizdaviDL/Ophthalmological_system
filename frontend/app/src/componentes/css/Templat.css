@@ -1,0 +1,63 @@
+.container{
+    background-color: rgb(59, 59, 59);
+  
+}
+
+.container .navbar{
+    background-color: #558C98;
+    height: 5rem;
+    display: flex;
+}
+
+.container .navbar .logo{
+    height: 5rem;
+    width: 7rem;
+}
+
+.container .navbar .logo img{
+    height: 5rem;
+    width: 6rem;
+}
+
+.container .navbar .icon{
+    display: flex;
+    margin-left: 27rem;
+}
+
+
+
+.container .navbar .icon .user{
+   display: flex;
+}
+
+
+.container .navbar .icon .user{
+    
+    height: 5rem;
+    width: 4rem;
+    margin-left: 50rem;
+}
+
+.container .navbar .icon .user img{
+    
+    height: 2rem;
+    width: 3rem;
+    margin-top: 1rem;
+    
+}
+
+.container .navbar .icon .logout{
+    
+    height: 4rem;
+    width: 3rem;
+    margin-left: 1rem;
+}
+
+.container .navbar .icon .logout img{
+    
+    height: 2rem;
+    width: 2rem;
+    margin-top: 1rem;
+    
+}
+

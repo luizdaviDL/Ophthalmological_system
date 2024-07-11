@@ -1,0 +1,76 @@
+.containerv{
+    background-color: #ffffff;
+    display: flex;
+    height: 3.30rem;
+    width: 57rem;
+    box-shadow: 0 8px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.containerv .id{
+    margin-left: .80rem;
+    width: 2rem;
+    margin-right: .70rem;
+    text-align: center;
+}
+
+.containerv .name{
+    width: 15rem;
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.containerv .document{
+    width: 8.50rem;
+    text-align: center;
+}
+
+.containerv .document2{  
+    width: 5rem;
+    margin-left: 1rem;
+    text-align: center;
+}
+
+.containerv .department{
+    width: 7rem;
+    margin-left: 2rem;
+    text-align: center;
+}
+
+.containerv .especialityv{
+    width: 7rem;
+    margin-left: 2rem;
+    text-align: center;
+}
+
+
+.containerv .icons button img{
+    width: 1rem;
+    height: 1rem;
+}
+
+
+.containerv .icons button{
+    height: 2rem;
+    margin-top: .70rem;
+    background-color: white;
+    border: none;
+    margin-left: .1rem;
+    border-radius: .50rem;
+}
+
+.containerv .icons .edit:hover{
+    border: .1rem solid rgb(95, 94, 94);
+    transition: .1s;
+}
+
+.containerv .icons .delete:hover{
+    border: .1rem solid rgb(95, 94, 94);
+    transition: .1s;
+}
+
+.containerv .icons {  
+    display: flex;
+    margin-left: 2rem;
+    margin-top: .30rem;
+}

@@ -1,0 +1,28 @@
+.containerApo{
+    background-color: #135048;
+    display: flex;
+    height: 3rem;
+    width: 50rem;
+    margin-bottom: 1rem;
+}
+
+.containerApo .idCamp{
+    margin-left: 3.80rem;
+    margin-right: 2rem;
+    color: white;
+    height: 2rem;
+}
+
+.containerApo .nameCamp{
+    margin-left: 7rem;
+    margin-right: 2rem;
+    color: white;
+    height: 2rem;
+}
+
+.containerApo .nameCamp2{
+    margin-left: 10rem;
+    margin-right: 2rem;
+    color: white;
+    height: 2rem;
+}

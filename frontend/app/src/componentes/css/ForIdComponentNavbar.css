@@ -1,0 +1,22 @@
+.containerNav{
+    background-color: #135048;
+    display: flex;
+    height: 3rem;
+    margin-bottom: 1rem;
+    padding-left: .40rem;
+}
+
+.containerNav .id{
+    margin-left: 5rem;
+    margin-right: 10rem;
+    color: white;
+}
+
+.containerNav .patient{
+    margin-right: 8.50rem;
+    color: white;
+}
+.containerNav .document{
+    color: white;
+    margin-left: 2rem;
+}

@@ -1,0 +1,48 @@
+.container{
+    width: 40rem;
+    height: 8rem;
+}
+
+
+.containerValues{
+    display: flex;
+    
+    height: 2.50rem;
+    padding-left: .20rem;
+}
+
+.containerValues  p{
+    margin-top: .8rem; 
+     color: black;
+}
+
+.containerValues .id{   
+    background-color: #FFFFFF;
+    margin-left: 4.50rem;
+    margin-right: 4rem;
+    width: 3rem;
+    text-align: center;
+    border-radius: .30rem;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.containerValues .id p{
+    color: black;
+}
+
+.containerValues .name{
+    background-color: #FFFFFF;
+    width: 14rem;
+    text-align: center;
+    border-radius: .30rem;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.containerValues .document{
+    background-color: #FFFFFF;
+    margin-left: 2rem;
+    width: 9rem;
+    text-align: center;
+    border-radius: .30rem;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+}

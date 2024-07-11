@@ -1,0 +1,59 @@
+.containerA{
+    background-color: #ffffff;
+    display: flex;
+    height: 3.30rem;
+    width: 50rem;
+    box-shadow: 0 8px 3px rgba(0, 0, 0, 0.1);;
+}
+
+.containerA .id{
+    margin-left: 3rem;
+    width: 2rem;
+    margin-right: 2rem;
+    text-align: center;
+    width: 3rem;
+}
+
+.containerA .name{
+    width: 15rem;
+    margin-right: 2rem;
+    text-align: center;
+}
+
+
+.containerA .name2{
+    width: 15rem;
+    margin-right: 2rem;
+    text-align: center;
+}
+
+
+.containerA .Apicons  button img{
+    width: 1rem;
+    height: 1rem;
+}
+
+
+.containerA .Apicons button{
+    height: 2rem;
+    margin-top: .70rem;
+    background-color: white;
+    border: none;
+    margin-left: .1rem;
+    border-radius: .50rem;
+}
+
+.containerA .Apicons .visualize:hover{
+    border: .1rem solid rgb(95, 94, 94);
+    transition: .1s;
+}
+
+.containerA .Apicons .delete:hover{
+    border: .1rem solid rgb(95, 94, 94);
+    transition: .1s;
+}
+
+.containerA .Apicons {
+    display: flex;
+    margin-left: .3rem;
+}

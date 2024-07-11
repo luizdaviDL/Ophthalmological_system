@@ -1,0 +1,40 @@
+.containerB{
+    width: 40rem;
+    height: 8rem;
+}
+
+.containerNavB{
+    background-color: #135048;
+    display: flex;
+    height: 3rem;
+    margin-bottom: 1rem;
+    padding-left: .40rem;
+    
+}
+
+.containerNavB .name{
+    width: 5rem;
+    height: 1.50rem;
+    color: white;
+    text-align: center;
+    margin-left: 4rem;
+    margin-right: 9rem;
+}
+
+.containerNavB .email{
+    width: 5rem;
+    height: 1.50rem;
+    color: white;
+    text-align: center;
+    margin-left: 4rem;
+    margin-right: 9rem;
+}
+
+.containerNavB .document{
+    width: 5rem;
+    height: 1.50rem;
+    color: white;
+    text-align: center;
+    margin-left: .1rem;
+    margin-right: 5rem;
+}

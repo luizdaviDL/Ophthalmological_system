@@ -1,0 +1,45 @@
+.containerCln{
+    background-color: #135048;
+    display: flex;
+    height: 3rem;
+    width: 44rem;
+    margin-bottom: 1rem;
+}
+
+.containerCln .id{
+    margin-left: 1.10rem;
+    margin-right: 2rem;
+    color: white;
+   
+    height: 2rem;
+}
+
+.containerCln .name{
+    margin-left: 3rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerCln .document{
+    margin-left: 7rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+
+
+.containerCln .department{
+    margin-left: 4rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+

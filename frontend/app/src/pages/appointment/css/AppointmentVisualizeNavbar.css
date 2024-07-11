@@ -1,0 +1,60 @@
+.containerApn{
+    background-color: #135048;
+    display: flex;
+    height: 3rem;
+    width: 57rem;
+    margin-bottom: 1rem;
+}
+
+.containerApn .id{
+    margin-left: 1.10rem;
+    margin-right: 2rem;
+    color: white;
+   
+    height: 2rem;
+}
+
+.containerApn .name{
+    margin-left: 3rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerApn .document{
+    margin-left: 7rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerApn .document2{
+    margin-left: 1.40rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerApn .department{
+    margin-left: 2rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerApn .especiality{
+    margin-left: 3.20rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}

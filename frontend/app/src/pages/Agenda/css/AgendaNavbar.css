@@ -1,0 +1,52 @@
+.containerAg{
+    background-color: #135048;
+    display: flex;
+    height: 3rem;
+    width: 50rem;
+    margin-bottom: 1rem;
+}
+
+.containerAg .status{
+    margin-left: .4rem;
+    margin-right: 2rem;
+    color: white;
+   
+    height: 2rem;
+}
+
+.containerAg .time{
+    margin-left: -1rem;
+    margin-right: 2rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerAg .patient{
+    margin-left: 2.30rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerAg .document{
+    margin-left: 5rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.containerAg .doctor{
+    margin-left: 5rem;
+    color: white;
+   
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+}
