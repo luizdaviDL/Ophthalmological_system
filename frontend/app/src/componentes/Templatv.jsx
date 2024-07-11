@@ -1,7 +1,8 @@
 import React from 'react'
 import './css/Templat.css'
 
-const templat = () => {
+
+const Templatv = ({children}) => {
   return (
     <div>
       <div className="container">
@@ -16,28 +17,17 @@ const templat = () => {
                 <img src="../src/icons/key.png" alt="" />
               </div>
 
-              <div className="logout">
-                <img src="../src/icons/logout.png" alt="" />
-              </div>
+              
             </div>
         </div>
 
         <div className="interfaceMain">
-          <div className="sideBar">
-
-          </div>
-
-          <div className="body">
-
-          </div>
+            {children}
         </div>
-
-
-
 
       </div>
     </div>
   )
 }
 
-export default templat
+export default Templatv

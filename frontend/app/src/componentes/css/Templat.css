@@ -10,8 +10,9 @@
 }
 
 .container .navbar .logo{
-    height: 5rem;
+    height: 6rem;
     width: 7rem;
+   
 }
 
 .container .navbar .logo img{
@@ -21,7 +22,7 @@
 
 .container .navbar .icon{
     display: flex;
-    margin-left: 27rem;
+    margin-left: 33rem;
 }
 
 
@@ -32,32 +33,30 @@
 
 
 .container .navbar .icon .user{
-    
     height: 5rem;
     width: 4rem;
     margin-left: 50rem;
 }
 
 .container .navbar .icon .user img{
-    
-    height: 2rem;
-    width: 3rem;
+    border-radius: 2rem;
+    height: 3.50rem;
+    width: 3.50rem;
     margin-top: 1rem;
-    
+    background-color: blue;
 }
 
-.container .navbar .icon .logout{
-    
-    height: 4rem;
-    width: 3rem;
-    margin-left: 1rem;
+.interfaceMain{
+    display: flex;
 }
 
-.container .navbar .icon .logout img{
-    
-    height: 2rem;
-    width: 2rem;
-    margin-top: 1rem;
-    
+.interfaceMain .sideBar{
+    background-color: #0A424F;
+    width: 13rem;
+    height: 44.72rem;    
 }
 
+.interfaceMain .body{
+    background-color: #EBE6E6;
+    width: 90rem;
+}

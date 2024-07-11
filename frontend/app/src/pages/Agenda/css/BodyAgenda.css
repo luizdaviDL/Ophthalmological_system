@@ -1,0 +1,17 @@
+.containerBa{
+    background-color: white;
+    width: 75rem;
+    margin-left: 3rem;
+    margin-top: 2rem;
+    height: 40rem;
+    display: flex;
+}
+
+.containerBa .bodyAgenda{
+    background-color: brown;
+    width: 45rem;
+    margin-left: 14rem;
+    height: 4rem;
+    margin-top: 2rem;
+}
+

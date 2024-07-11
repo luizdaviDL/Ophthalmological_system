@@ -4,19 +4,24 @@
     height: 3rem;
     margin-bottom: 1rem;
     padding-left: .40rem;
+    width: 40rem;
+    border-radius: .70rem;
 }
 
 .containerNav .id{
     margin-left: 5rem;
     margin-right: 10rem;
     color: white;
+    margin-top: 1rem;
 }
 
 .containerNav .patient{
     margin-right: 8.50rem;
     color: white;
+    margin-top: 1rem;
 }
 .containerNav .document{
     color: white;
     margin-left: 2rem;
+    margin-top: 1rem;
 }
