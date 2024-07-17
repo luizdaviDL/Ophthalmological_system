@@ -1,14 +1,10 @@
-.container{
-    width: 40rem;
-    height: 8rem;
-}
-
 
 .containerValues{
     display: flex;
-    
     height: 2.50rem;
     padding-left: .20rem;
+    margin-bottom: 1rem;
+   
 }
 
 .containerValues  p{

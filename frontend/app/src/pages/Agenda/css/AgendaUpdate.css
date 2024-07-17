@@ -1,0 +1,33 @@
+.containerAUP .iconClose img{
+    width: 1.50rem;
+    height: 1.50rem;
+   
+    margin-top: .40rem;
+    margin-left: 40rem;
+   
+}
+
+.containerAUP{
+    background-color: #FFFFFF;
+    
+    height: 31rem;
+    width: 43rem;
+    margin-left:16rem;
+    margin-top: 3rem;
+    
+}
+
+.containerAUP .bosyContainerAUP{
+    width: 41.70rem;
+    height: 28rem;
+    margin-left: .70rem;
+    margin-top: .50rem;
+   
+
+}
+
+.containerAUP  .butonsAction{
+    margin-left: 22rem;
+    position: absolute;
+    margin-top: -3rem;
+}

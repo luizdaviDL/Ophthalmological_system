@@ -1,0 +1,54 @@
+.mensage{
+    width: 15rem;
+    height: 3rem;
+    margin-top: .50rem;
+    margin-left: .50rem;
+    box-shadow: 0 8px 3px rgba(0, 0, 0, 0.1);;
+    display: flex;
+}
+
+.mensage .profile{
+    width: 3.50rem;
+}
+
+.mensage .profile .image{
+    background-color: rgb(10, 58, 131);
+    height:2.50rem;
+    width: 2.50rem;
+    border-radius:3rem;
+    margin-top: .1rem;
+    margin-left: .3rem;
+}
+
+.mensage .nameuser{
+    width:8.10rem;
+    margin-left: .30rem;
+}
+
+.mensage .nameuser h4{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    text-align: center;
+}
+
+.mensage .iconStatus{
+    width: 2.90rem;
+
+}
+
+.mensage .iconStatus .iconColor{
+    background-color: rgb(31, 7, 87);
+    border-radius:3rem;
+    height: .70rem;
+    width: .70rem;
+    margin-top: .60rem;
+    margin-left: .90rem;
+
+}
+
+
+.mensage .iconStatus .timeMensage p{
+    text-align: center;
+    color: rgb(53, 48, 48);
+    margin-top: .10rem;
+}

@@ -1,8 +1,9 @@
 .containerA{
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
+
     display: flex;
     height: 3.30rem;
-    width: 50rem;
+    width: 53rem;
     box-shadow: 0 8px 3px rgba(0, 0, 0, 0.1);;
 }
 
@@ -34,38 +35,43 @@
 .containerA .icons {
     display: flex;
     margin-left: -1.5rem;
+    margin-top: .60rem;
 }
 
 .containerA .status{
-    margin-left: .80rem;
+   margin-top: 1.50rem;
     width: 2rem;
-    margin-right: 2rem;
+    margin-right: .20rem;
     text-align: center;
 }
 
 .containerA .time{
     width: 5rem;
-    margin-right: 2rem;
+    margin-right: .40rem;
     margin-left: .40rem;
     text-align: center;
+   margin-top: 1.50rem;
 }
 
 .containerA .patient{
     width: 15rem;
-    margin-right: 2rem;
+    margin-right: 1rem;
     text-align: center;
+   margin-top: 1.50rem;
 }
 
 .containerA .document{
-    width: 5rem;
-    margin-right: 2rem;
+    width: 9rem;
+    margin-right: 1rem;
     text-align: center;
+   margin-top: 1.50rem;
 }
 
 .containerA .doctor{
     width: 15rem;
     margin-right: 2rem;
     text-align: center;
+   margin-top: 1.50rem;
 }
 
 

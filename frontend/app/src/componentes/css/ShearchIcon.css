@@ -1,0 +1,19 @@
+.searchC{
+    width: 100%;
+    height: 3rem;
+    margin-left: 19rem;
+    margin-top: 2rem;
+}
+
+.searchC input{
+    height: 2rem;
+    width: 100%;
+    border-radius: 1rem;
+    border: .10rem solid slategrey;
+    outline: none;
+    
+}
+
+.searchC input::placeholder{
+    text-align: center;
+}

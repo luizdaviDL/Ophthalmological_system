@@ -1,0 +1,136 @@
+.AgendaUpdateSHow {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    height: 44.78rem;
+    width: 97rem;
+    
+}
+
+.AgendaUpdateSHow .component{
+    margin-left: 14rem;
+}
+
+
+.mainCamp{
+    width: 75rem;
+    height: 40rem;
+    display: flex;
+    /*background-color: aqua;*/  }
+
+.mainCamp .statisticCamp{
+  
+    margin-left: 4rem;
+    width: 16rem;
+}
+
+.chatCamp{
+    height: 16rem;
+    border: .13rem solid #E8E0E0;
+    background-color: #F4F4F4;
+    box-shadow: 0 0 10px rgba(105, 104, 104, 0.5);
+}
+
+.chatCamp .shearchUser{
+    height: 3rem;
+}
+
+.chatCamp .shearchUser input{
+    height: 2rem;
+    margin-left: 2.30rem;
+    border-radius: 1rem;
+    border: .10rem solid slategrey;
+    outline: none;
+    margin-top: .40rem;
+}
+
+.chatCamp .shearchUser input::placeholder{
+    text-align: center;
+}
+
+.chatCamp .mensageCamp{
+    height:12.90rem;
+    overflow-y: scroll; /* Habilita a barra de rolagem vertical */
+    overflow-x: hidden;
+    scrollbar-width: none; /* Esconde a barra de rolagem no Firefox */
+}
+
+
+
+/*---------body-------------*/
+.bodyAgenda{
+    width: 45rem;
+    margin-left: 3rem;
+    height: 4rem;
+    margin-top: 2rem;
+}
+
+ .datasAgenda{
+    
+    width: 45rem;
+    margin-left: 3rem;
+    height: 3.20rem;    
+}
+
+.dateCamp {
+    
+    display: flex;
+}
+
+.mainCamp .datasAC .dateCamp .dateV{
+    
+    height: 3rem;
+    width: 19rem;
+    margin-left: 7rem;
+}
+
+.mainCamp .datasAC .dateCamp .dateV h1{
+    text-align: center;
+    border-bottom: .30rem solid black;
+}
+
+.mainCamp .datasAC .dateCamp .calendaryIcon{
+    display: flex;
+    
+    height: 3rem;
+    width: 6rem; 
+    margin-left: 22rem;
+}
+
+
+.mainCamp .datasAC .dateCamp .calendaryIcon .date{
+    height: 2.80rem;
+    width: 2.90rem; 
+    background-color: rgb(213, 213, 235);
+   
+    border: none;
+    outline: none;
+}
+
+.mainCamp .datasAC .dateCamp .calendaryIcon .image{
+    height: 3rem;
+    width: 3rem; 
+    background-color: rgb(248, 248, 250);
+   margin-left: -3rem;
+    pointer-events: none;
+    
+}
+
+.mainCamp .datasAC .dateCamp .calendaryIcon .date::-webkit-calendar-picker-indicator {
+    /*  posicionar o ícone do calendário absolutamente */
+    top: 0;
+    right: 0;
+    width: 50px; /* largura do ícone do calendário */
+    height: 50px; /* altura do ícone do calendário */
+    background-color: #fff; /* fundo branco para o ícone do calendário */
+    border: none; /* remover a borda do ícone do calendário */
+    padding: 0; /* remover o padding do ícone do calendário */
+    cursor: pointer; /* mudar o cursor para uma mão */
+  }
+
+.mainCamp .datasAC  .search{
+    height: 3rem;
+    width: 19rem;
+
+  }
+
+

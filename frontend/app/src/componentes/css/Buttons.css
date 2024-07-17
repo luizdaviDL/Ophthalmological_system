@@ -1,0 +1,12 @@
+.containerButons{
+    display: flex;
+    width: 12rem;
+    height: 2rem;
+  
+}
+
+.containerButons img{
+    width: 2rem;
+    height: 2rem;
+    margin: 0 1rem;
+}

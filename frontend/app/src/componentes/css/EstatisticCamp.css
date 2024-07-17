@@ -1,0 +1,67 @@
+.statistic{
+    background-color: #ebebeb;
+    height: 15rem;
+    margin-top: 5rem;
+    box-shadow: 0 0 10px rgba(105, 104, 104, 0.5);
+}
+
+.statistic .textS{
+   
+    height: 3rem;
+}
+
+.statistic .textS p{
+    padding-top: 1rem;
+    text-align: center;
+    color: #020202;
+}
+
+.statistic .textS .barr{
+    height: .40rem;
+    width: 9rem;
+    margin-left: 3.50rem;
+    background-color: #368C92;
+   
+}
+
+.statistic  .total{
+   
+    display: flex;
+    height: 2rem;
+   
+}
+
+.statistic  .total p{
+    padding-top: .50rem;
+    text-align: center;
+    color: #020202;
+    margin-left: 3rem;
+}
+
+.statistic .dataTotal{
+    margin-top: .78rem;
+    display: flex;    
+}
+
+.statistic .dataTotal .iconColor{
+    width: 1.10rem;
+    height: 1.10rem;
+    margin-left: 2.70rem;
+    border-radius: 1rem;
+ 
+}
+
+.statistic .dataTotal .textStatus{
+
+    width: 6rem;
+    margin-left: .50rem;
+    text-align: center;
+}
+
+.statistic .dataTotal .Number{
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
+    text-align: center;
+}
+

@@ -1,0 +1,15 @@
+.text{
+    background-color: #ffffff;
+    max-height: 10rem;
+    width: 15rem;
+    margin-left: .90rem;
+    margin-top: .60rem;
+    border-radius: .30rem;
+    box-shadow: 0 -10px 10px rgba(31, 30, 30, 0.1);
+}
+
+.text p{
+    margin-left: .60rem;
+    margin-right: .60rem;
+}
+
