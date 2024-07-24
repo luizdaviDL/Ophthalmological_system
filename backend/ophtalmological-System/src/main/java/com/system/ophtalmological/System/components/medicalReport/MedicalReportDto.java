@@ -1,7 +1,5 @@
 package com.system.ophtalmological.System.components.medicalReport;
 
-import java.util.List;
-
 import com.system.ophtalmological.System.components.clerk.ClerkDto;
 import com.system.ophtalmological.System.components.patients.PatientDto;
 import com.system.ophtalmological.System.components.report.ReportDto;

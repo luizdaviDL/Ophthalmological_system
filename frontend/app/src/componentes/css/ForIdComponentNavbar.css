@@ -10,19 +10,26 @@
 }
 
 .containerNav .id{
-    margin-left: 5rem;
-    margin-right: 10rem;
+    margin-left: 2.50rem;
+    margin-right: 5rem;
     color: white;
     margin-top: 1rem;
+    width: 5rem;
+    text-align: center;
 }
 
 .containerNav .patient{
-    margin-right: 8.50rem;
+    margin-right: 3rem;
     color: white;
     margin-top: 1rem;
+    width: 9rem;
+    margin-left: 1rem;
+    text-align: center;
 }
 .containerNav .document{
     color: white;
-    margin-left: 2rem;
+    margin-left: 3rem;
     margin-top: 1rem;
+    width: 5rem;
+    text-align: center;
 }

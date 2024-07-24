@@ -5,8 +5,18 @@ const Buttons = () => {
   return (
     <div>
       <div className="containerButons">        
-        <img src="../src/icons/marca.png" alt="" />
-        <img src="../src/icons/excluir.png" alt="" />
+        <div title='salvar'>
+            <img className='save' src="../src/icons/marca.png" alt="" />
+        </div>
+        
+        <div title='deletar'>
+          <img className='delete' src="../src/icons/excluir.png" alt="" />
+        </div>
+
+        <div title='remarcar'>
+          <img className='reschedule' src="../src/icons/reagendar.png" alt="" />
+        </div>
+        
       </div>
     </div>
   )

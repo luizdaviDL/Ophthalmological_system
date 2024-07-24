@@ -1,11 +1,25 @@
+.AgendaUpdateSHow {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    height: 44.75rem;
+    width: 98.30rem;
+    overflow-y: hidden;
+}
+
+.AgendaUpdateSHow .component{
+    margin-left: 14rem;
+}
+
+
+
 .containerAUP .iconClose img{
     width: 1.50rem;
     height: 1.50rem;
-   
     margin-top: .40rem;
-    margin-left: 40rem;
-   
+    margin-left: 40rem;   
 }
+
+
 
 .containerAUP{
     background-color: #FFFFFF;
@@ -13,7 +27,7 @@
     height: 31rem;
     width: 43rem;
     margin-left:16rem;
-    margin-top: 3rem;
+    margin-top: 5rem;
     
 }
 
@@ -26,8 +40,20 @@
 
 }
 
+.containerAUP .bosyContainerAUP .onlyCamps{
+    display: flex;
+}
+
+.containerAUP .bosyContainerAUP .onlyCamps .dataV{
+    margin-left: .99rem;
+}
+
+.containerAUP .bosyContainerAUP .onlyCamps .timeV{
+    margin-left: .99rem;
+}
+
 .containerAUP  .butonsAction{
-    margin-left: 22rem;
+    margin-left: 29rem;
     position: absolute;
     margin-top: -3rem;
 }

@@ -1,7 +1,11 @@
 import React from 'react'
 import './css/Agenda.css'
 
-const Agenda = ({ponit, time, name, document, name2}) => {
+
+const Agenda = ({ponit, time, name, document, name2, callModal}) => {
+
+ 
+
   return (
     <div>
         <div className="containerA">
@@ -25,10 +29,11 @@ const Agenda = ({ponit, time, name, document, name2}) => {
             </div>
 
             <div className="icons">
-                <button className='edit'><img src="../src/icons/escrever.png" id='edit'/></button>
-                <button className='delete'><img src="../src/icons/lixeira.png" id='delete'/></button>
+                <button className='edit'><img src="../src/icons/escrever.png" id='edit' onClick={callModal}/></button>
+                <button className='delete'><img src="../src/icons/lixeira.png" id='delete' /></button>
             </div>
         </div>
+        
     </div>
   )
 }

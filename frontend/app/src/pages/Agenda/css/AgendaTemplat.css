@@ -1,20 +1,10 @@
-.AgendaUpdateSHow {
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
-    height: 44.78rem;
-    width: 97rem;
-    
-}
-
-.AgendaUpdateSHow .component{
-    margin-left: 14rem;
-}
 
 
 .mainCamp{
     width: 75rem;
     height: 40rem;
     display: flex;
+    overflow-y: hidden;
     /*background-color: aqua;*/  }
 
 .mainCamp .statisticCamp{

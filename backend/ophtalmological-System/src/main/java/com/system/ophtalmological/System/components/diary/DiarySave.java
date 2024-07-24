@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +18,8 @@ public class DiarySave {
 	private Long patient;
 	private Long appointment; 
 	private Long doctor;
+	//when desserialize data in this format dont show erro
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date date;
 	private LocalTime time;
 	

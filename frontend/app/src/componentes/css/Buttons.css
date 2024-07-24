@@ -10,3 +10,21 @@
     height: 2rem;
     margin: 0 1rem;
 }
+
+.containerButons  .save:hover{
+    content: "salvar";
+    margin-top: -0.6rem;
+ 
+}
+
+.containerButons  .delete:hover{
+    content: "deletar";
+    margin-top: -0.6rem;
+ 
+}
+
+.containerButons  .reschedule:hover{
+    content: "remarcar";
+    margin-top: -0.6rem;
+ 
+}
