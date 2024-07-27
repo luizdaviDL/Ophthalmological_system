@@ -1,8 +1,11 @@
 import React from 'react'
 import './css/ForIdComponent.css'
+import { useState } from 'react'
 
+const ForIdCompoente = ({id, name, document, habiliteEdit}) => {
+  const [nameNew, setnameNew] = useState(name); 
+  const [documentNew, setdocumentNew] = useState(document); 
 
-const ForIdCompoente = ({id, name, document}) => {
   return (
     <div>
       
@@ -12,11 +15,26 @@ const ForIdCompoente = ({id, name, document}) => {
           </div>
 
           <div className="name">
-            <p>{name} </p>
+            {habiliteEdit==true?
+              <div className="newName">
+                  <input type="text" 
+                  defaultValue={nameNew}   
+                  onChange={(e)=> setnameNew(e.target.value)}           
+                  />
+              </div>
+            : <p>{name} </p>}            
           </div>
 
           <div className="document">
-            <p>{document} </p>
+            {habiliteEdit?
+                <div className="newDocument">
+                    <input type="text" 
+                    defaultValue={documentNew}   
+                    onChange={(e)=> setdocumentNew(e.target.value)}             
+                    />
+                </div>
+            : <p>{document} </p>}
+            
           </div>
         </div>
     </div>

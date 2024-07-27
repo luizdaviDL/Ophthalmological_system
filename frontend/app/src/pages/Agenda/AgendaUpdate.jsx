@@ -9,9 +9,14 @@ import OnlyCamp from '../../componentes/OnlyCamp'
 import './css/AgendaUpdate.css'
 import { useState } from 'react'
 
-const AgendaUpdate = ({styleModal, closeModal}) => {
+const AgendaUpdate = ({styleModal, closeModal, values, navBarName}) => {
     
+    const [habiliteEdit, setabiliteEdit] = useState(values);
+ 
 
+    function handleHability(){
+        setabiliteEdit(true)
+    }
 
   return (
     <div>
@@ -22,31 +27,31 @@ const AgendaUpdate = ({styleModal, closeModal}) => {
                             <img src="../src/icons/close.png" alt="" />
                         </div>
                         <div className="bosyContainerAUP">
-                            <ForIdComponentNavbar navid={'id'} navName={'Paciente'} navDocument={'CPF'}/>
-                            <ForIdComponent id={1} name={'Luiz Carlos SIlva Brito'} document={'098.584.221-99'}/>
+                            <ForIdComponentNavbar navid={navBarName[0]} navName={navBarName[1]} navDocument={navBarName[2]}/>
+                            <ForIdComponent id={values[0]} name={habiliteEdit[1]} document={habiliteEdit[2]}  habiliteEdit={habiliteEdit} />
 
-                            <ForIdComponentNavbar navid={'Status'} navName={'Doutor(a)'} navDocument={'RG'}/>
-                            <ForIdComponent id={'Ativo'} name={'Mariana Silva'} document={'8843254'}/>
+                            <ForIdComponentNavbar navid={navBarName[3]} navName={navBarName[4]} navDocument={navBarName[5]}/>
+                            <ForIdComponent id={values[3]} name={habiliteEdit[4]} document={habiliteEdit[5]}  habiliteEdit={habiliteEdit} />
 
                             <div className="onlyCamps">
                                 <div className="appointmentsV">
-                                    <OnlyNavbar value={'Consulta'}/>
-                                    <ManyCamps appointment={['Dermatologista']}/>
+                                    <OnlyNavbar value={navBarName[6]}/>
+                                    <ManyCamps appointment={[habiliteEdit[6]]}  habiliteEdit={habiliteEdit} />
                                 </div>
                                 
                                 <div className="dataV">
-                                    <OnlyNavbar value={'Data'}/>
-                                    <OnlyCamp value={'01/02/2022'}/>
+                                    <OnlyNavbar value={navBarName[7]}/>
+                                    <OnlyCamp value={habiliteEdit[7]} habiliteEdit={habiliteEdit}/>
                                 </div>
 
                                 <div className="timeV">
-                                    <OnlyNavbar value={'Hora'}/>
-                                    <OnlyCamp value={'09:00'}/>
+                                    <OnlyNavbar value={navBarName[8]}/>
+                                    <OnlyCamp value={habiliteEdit[8]} habiliteEdit={habiliteEdit}/>
                                 </div>
                             </div>
                         </div>
                         <div className="butonsAction">
-                            <Buttons/>
+                            <Buttons handleChange={handleHability} />
                         </div>
             
                     </div>

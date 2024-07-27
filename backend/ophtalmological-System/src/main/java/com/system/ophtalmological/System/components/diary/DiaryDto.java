@@ -20,10 +20,23 @@ public class DiaryDto {
 	private ClerkDto doctor;
 	private Date date;
 	private LocalTime time;
+	private boolean status;
 	
 	public DiaryDto() {
 		super();
 	}
+	public DiaryDto(Long id, PatientDto patient, AppointmentDto appointment, ClerkDto doctor, Date date,
+			LocalTime time, boolean status) {
+		super();
+		this.id = id;
+		this.patient = patient;
+		this.appointment = appointment;
+		this.doctor = doctor;
+		this.date = date;
+		this.time = time;
+		this.status = status;
+	}
+	
 	public DiaryDto(Long id, PatientDto patient, AppointmentDto appointment, ClerkDto doctor, Date date,
 			LocalTime time) {
 		super();
@@ -33,6 +46,7 @@ public class DiaryDto {
 		this.doctor = doctor;
 		this.date = date;
 		this.time = time;
+	
 	}
 	
 	

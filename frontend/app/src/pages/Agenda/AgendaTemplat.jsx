@@ -10,6 +10,8 @@ import ChatMensage from '../../componentes/chats/ChatMensage'
 import ChatMensageBody from '../../componentes/chats/ChatMensageBody'
 import EstatisticCamp from '../../componentes/EstatisticCamp'
 import AgendaUpdate from './AgendaUpdate'
+import moment from 'moment';
+
 import { useState, useEffect } from 'react'
 
 const AgendaTemplat = () => {
@@ -23,14 +25,27 @@ const AgendaTemplat = () => {
     const [inputday, setinputday] = useState('');
     const [inputmounth, setinputmounth] = useState('');
     const [inputyear, setinputyear] = useState('');
+    const [getUpdate, setgetUpdate] = useState([]);
 
-    const handleClick = ()=>{
+    function handleClick(e){
         setModal(true)
+        setgetUpdate(e)
     }
 
     const closeClick=()=>{
         setModal(false)
     }
+
+    function ModifyHour(value){
+        const [hour, minut, second] = value.split(':')
+        return hour+':' +minut
+    }
+
+    function ModifyDate(dateR) {
+        {/**does not convert date to local time zone , keep the date*/}
+        const dataFormatada = moment.utc(dateR).format('DD/MM/YYYY');
+        return dataFormatada
+      }
   
     const getDate=(value)=>{
         const month = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
@@ -69,6 +84,10 @@ const AgendaTemplat = () => {
     },[]);
      {/**[] is used to sstart useEffect with a value after go to bin(lixeira) */}
 
+    {/**Get data when updateAgenda */}
+    const NavbarNames = ['id','Paciente','CPF','Status','Doutor(a)','RG','Consulta','Data','Hora']
+    const DatasPatient = [getUpdate.id, getUpdate.patient?.fullname, getUpdate.patient?.cpf, getUpdate.status==true ?'Ativo': 'Cancelado', getUpdate.doctor?.fullname, getUpdate.patient?.rg, getUpdate.appointment?.name, getUpdate.date ? ModifyDate(getUpdate.date) : '' , getUpdate.time ? ModifyHour(getUpdate.time): '']
+
   return (
     
         <Templatv>
@@ -76,9 +95,9 @@ const AgendaTemplat = () => {
             `{/**
              * {showModal && <AgendaUpdate styleModal={'block'} = True and Expression(<AgendaUpdate styleModal={'block'} ) = True (that show the Component)
              * {showModal && <AgendaUpdate styleModal={'block'} = False and Expression(<AgendaUpdate styleModal={'block'} ) = False (dont show the Component)
-             *     
              */}`
-            {showModal && <AgendaUpdate styleModal={'block'} closeModal={closeClick}/> } 
+             
+            {showModal && <AgendaUpdate styleModal={'block'} closeModal={closeClick} values={DatasPatient} navBarName={NavbarNames}/> } 
 
             <div className="sideBar">               
                 <NavsidBarC value={'Agenda'} img={"../src/icons/calendario.png"} />                                               
@@ -118,30 +137,13 @@ const AgendaTemplat = () => {
                             <div className="datasAgenda">
 
                                 {
-                                    Array.isArray(getData) && getData.map(value=>{
-                                        const dateR = new Date(value.date);
-                                        const dataFormat = dateR.toLocaleString('pt-BR',{
-                                            year: 'numeric',
-                                            month: '2-digit',
-                                            day: '2-digit',
-                                            hour: '2-digit',
-                                            minute: '2-digit',
-                                            hour12: false
-                                        });
-                                        const dateV = dataFormat.split(',');
-                                        const dataValue = dateV[0];
+                                    Array.isArray(getData) && getData.map(value=>{                                        
+                                        const dataValue = ModifyDate(value.date);
                                         return(
-                                            <Agenda ponit={'.'} time={dataValue} name={value.patient.fullname} document={value.patient.rg} name2={value.doctor.fullname} callModal={handleClick} /> 
+                                            <Agenda ponit={'.'} time={dataValue} name={value.patient.fullname} document={value.patient.rg} name2={value.doctor.fullname} callModal={()=>handleClick(value)} /> 
                                         )
                                     })
                                 }
-
-                                {/** 
-                                <Agenda ponit={'.'} time={'09:80'} name={'Luiz Carlos SIlva'} document={'765.735.973-66'} name2={'Luan Silva Brito'} callModal={handleClick} />    
-                                <Agenda ponit={'.'} time={'09:80'} name={'Luiz Carlos SIlva'} document={'765.735.973-66'} name2={'Luan Silva Brito'} />
-                                <Agenda ponit={'.'} time={'09:80'} name={'Luiz Carlos SIlva'} document={'765.735.973-66'} name2={'Luan Silva Brito'} />
-                                <Agenda ponit={'.'} time={'09:80'} name={'Luiz Carlos SIlva'} document={'765.735.973-66'} name2={'Luan Silva Brito'} />
-                                */}
                             </div>
 
                         </div>

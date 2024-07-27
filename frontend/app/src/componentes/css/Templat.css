@@ -1,6 +1,7 @@
 .container{
     background-color: rgb(59, 59, 59);
     overflow-y: hidden;
+    
 }
 
 .container .navbar{

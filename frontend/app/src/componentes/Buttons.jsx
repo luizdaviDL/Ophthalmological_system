@@ -1,7 +1,7 @@
 import React from 'react'
 import './css/Buttons.css'
 
-const Buttons = () => {
+const Buttons = ({handleChange}) => {
   return (
     <div>
       <div className="containerButons">        
@@ -10,7 +10,7 @@ const Buttons = () => {
         </div>
         
         <div title='deletar'>
-          <img className='delete' src="../src/icons/excluir.png" alt="" />
+          <img className='delete' src="../src/icons/editarColoricon.png" onClick={handleChange}/>
         </div>
 
         <div title='remarcar'>

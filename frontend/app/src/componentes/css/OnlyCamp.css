@@ -13,3 +13,26 @@
     text-align: center;
    padding-top: .40rem;
 }
+
+.newValue{
+    background-color: #FFFFFF;
+    width: 12rem;
+    height: 2rem;
+    border-radius: .40rem;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+    
+    margin-top: 1rem;
+}
+
+.newValue input{
+    color: black;
+    text-align: center;
+   padding-top: .40rem;
+   border: none;
+   outline: none;
+}
+
+.newValue input[type="text"] {
+    font-size: 16px;
+    font-family: serif;
+  }

@@ -103,12 +103,13 @@ public class DiaryService {
 		List<Diary> allDiary = repository.findAll();
 		
 		allDiary.stream().forEach(i->{		
-			PatientDto patient =new PatientDto(i.getPatient());
+			PatientDto patient =new PatientDto(i.getPatient(), i.getPatient().getCpf());
+			
 			AppointmentDto appointment = new AppointmentDto(i.getAppointment());
 			DepartmentDto department = new DepartmentDto(i.getDoctor().getDepartment());
 			ClerkDto clerck = new ClerkDto(i.getDoctor(),department);
 			
-			DiaryDto instance = new DiaryDto(i.getId(),patient,appointment,clerck, i.getDate(), i.getTime());
+			DiaryDto instance = new DiaryDto(i.getId(),patient,appointment,clerck, i.getDate(), i.getTime(),i.isStatus());
 			dto.add(instance);
 		});
 		return dto;
