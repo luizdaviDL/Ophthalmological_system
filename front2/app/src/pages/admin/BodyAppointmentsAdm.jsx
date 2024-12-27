@@ -10,7 +10,7 @@ const BodyAppointmentsAdm = () => {
                 <th scope="col">#</th>
                 <th scope="col">Appointment</th>
                 <th scope="col">Clerck</th>
-                <th scope="col">Especiality</th>
+                <th scope="col">Profissionais</th>
                 <th scope="col"></th>
                 </tr>
             </thead>
@@ -19,11 +19,11 @@ const BodyAppointmentsAdm = () => {
                     <th scope="row">1</th>
                     <td>terapia</td>
                     <td>Rodrigo simas Pinto</td>
-                    <td>Clinico Geral</td>
+                    <td>20</td>
                     <td>
                         <div style={{display: "flex", gap:"1rem", justifyContent: "center"}}>
                             <div style={{ width: "2rem"}}>
-                                <button  type="button" class="btn " data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img src="../src/icons/escrever.png" style={{objectFit: "cover", width: "1.50rem", height: "1.50rem"}}/></button>
+                                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#staticBackdrop" ><img src="../src/icons/escrever.png" style={{objectFit: "cover", width: "1.50rem", height: "1.50rem"}}/></button>
                             </div>
 
                             <div style={{ width: "2rem"}}>
@@ -32,18 +32,7 @@ const BodyAppointmentsAdm = () => {
                         </div>
                     </td>
                 </tr>
-
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                
             </tbody>
         </table>
 

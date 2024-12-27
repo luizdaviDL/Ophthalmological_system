@@ -3,23 +3,30 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import '@popperjs/core';
 import ShearchMenuAdm from './admin/shearchMenuAdm';
-import BodyAppointmentsAdm from './admin/BodyAppointmentsAdm';
+import { Outlet } from 'react-router-dom'
+import Register from './admin/appointment/Register';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function TemplatApp({typeUSer}) {
-    let childrenBody;
+            
+    let menuOptional;
     
     switch(typeUSer){
-        case 'admin':
-            childrenBody = <BodyAppointmentsAdm/>;
+        case 'admin':           
+            menuOptional = <ShearchMenuAdm/>;
     };
 
+
+    
+
     return (
-        <div className="container" style={{height: "49rem"}}>
+        <div className="container" style={{height: "49rem",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
             <nav className="navbar bg-body-tertiary" >                
                 <div style={{display:"flex", background:" #558C98"}} className="d-flex justify-content-between w-100">
                     <div className="container" >
                         <a className="navbar-brand" href="#">
-                            <img src="../src/icons/logom.png" alt="Bootstrap" width="45" height="40rem" />
+                            <Link to={"/"}><img src="../src/icons/logom.png" alt="Bootstrap" width="45" height="40rem" /></Link>
                         </a>
                     </div>
                     
@@ -42,16 +49,16 @@ function TemplatApp({typeUSer}) {
                     <div className="header" style={{ width:"10rem"}}>
                         <p style={{textAlign: "center"}}>Busca de menu</p>
                     </div>              
-                    <ShearchMenuAdm/>                
+                    {menuOptional}             
                 </div>
 
-                <div id="bysideBody" style={{background:"rgb(247, 247, 247)", width:"150vh"}}>                    
-                    {childrenBody}                                    
+                <div id="bysideBody" style={{background:"rgb(247, 247, 247)", width:"150vh"}}>                                   
+                    <Outlet/>                                
                 </div>
                 
             </div>
             
-            
+          
         </div>
     );
 }
