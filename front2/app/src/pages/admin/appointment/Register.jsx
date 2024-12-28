@@ -33,6 +33,12 @@ const Register = () => {
         }
     };
 
+    const enableEditing = (index) => {
+        const newInputs = [...inputs];
+        newInputs[index].isDisabled = false; // Habilita o input para edição
+        setInputs(newInputs);
+    };
+
     return (
         <div>
             <div style={{ background: "rgb(255, 255, 255)", width: "50rem", marginLeft: "6rem", marginTop: "5rem", display: "flex", gap: "6rem", justifyContent: "center", paddingTop: "2rem", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
@@ -61,13 +67,13 @@ const Register = () => {
                             </button>
                         </div>
                     
-                        <div id='services' style={{ height: "6.40rem", overflowY: "auto", overflowX: "hidden", width: "20rem", display: "block" }}>
+                        <div id='services' style={{ height: "6.40rem", overflowY: "auto", overflowX: "hidden", width: "24rem", display: "block" }}>
                             {inputs.map((input, index) => (
                                 <div style={{ display: "flex", marginTop: ".70rem" }} key={input.id}>
                                     <div>
                                         <input
                                             id="inputAdd"
-                                            style={{ width: "15rem" }}
+                                            style={{ width: "20rem" }}
                                             type="text"
                                             className="form-control"
                                             value={input.value}
@@ -78,7 +84,7 @@ const Register = () => {
                                         />
                                     </div>
                                     <div>
-                                        <button style={{ border: "none" }} type="button" className="btn">
+                                        <button onClick={() => enableEditing(index)} style={{ border: "none" }} type="button" className="btn">
                                             <img src="../src/icons/escrever.png" style={{ objectFit: "cover", width: "1.50rem", height: "1.50rem" }} />
                                         </button>
                                     </div>
