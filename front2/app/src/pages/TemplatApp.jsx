@@ -21,16 +21,16 @@ function TemplatApp({typeUSer}) {
     
 
     return (
-        <div className="container" style={{height: "49rem",  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
-            <nav className="navbar bg-body-tertiary" >                
-                <div style={{display:"flex", background:" #558C98"}} className="d-flex justify-content-between w-100">
-                    <div className="container" >
-                        <a className="navbar-brand" href="#">
-                            <Link to={"/"}><img src="../src/icons/logom.png" alt="Bootstrap" width="45" height="40rem" /></Link>
-                        </a>
+        <div className="container-fluid" style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
+            <nav className="navbar bg-body-tertiary">
+                <div className="d-flex justify-content-between w-100" style={{ background: "#558C98" }}>
+                    <div className="container">
+                        <Link to={"/"} className="navbar-brand">
+                            <img src="../src/icons/logom.png" alt="Bootstrap" width="45" height="40" />
+                        </Link>
                     </div>
-                    
-                    <div className="dropdown-center" style={{marginRight:"1rem"}}>
+
+                    <div className="dropdown-center" style={{ marginRight: "1rem" }}>
                         <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Opção
                         </button>
@@ -41,24 +41,22 @@ function TemplatApp({typeUSer}) {
                         </ul>
                     </div>
                 </div>
-               
             </nav>
 
-            <div style={{display: "flex"}}>
-                <div id="offcanvs" style={{width: "13rem", background:"rgb(255, 255, 255)", height: "46rem"}}>
-                    <div className="header" style={{ width:"10rem"}}>
-                        <p style={{textAlign: "center"}}>Busca de menu</p>
-                    </div>              
-                    {menuOptional}             
+            {/* Usando d-flex para o layout principal */}
+            <div className="d-flex" style={{ height: "calc(100vh - 56px)" }}> {/* Ajuste a altura conforme necessário */}
+                <div id="offcanvs" className="bg-white" style={{ width: "13rem", height: "100%", overflowY: "auto" }}>
+                    <div className="header text-center">
+                        <p>Busca de menu</p>
+                    </div>
+                    {menuOptional}
                 </div>
 
-                <div id="bysideBody" style={{background:"rgb(247, 247, 247)", width:"150vh"}}>                                   
-                    <Outlet/>                                
+                {/* Usando flex-grow-1 para que este div ocupe o espaço restante */}
+                <div id="bysideBody" className="bg-light flex-grow-1" style={{ overflowY: "auto" }}>
+                    <Outlet />
                 </div>
-                
             </div>
-            
-          
         </div>
     );
 }

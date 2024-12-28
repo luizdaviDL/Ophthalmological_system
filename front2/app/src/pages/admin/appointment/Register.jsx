@@ -77,7 +77,7 @@ const Register = () => {
                                             ref={index === inputs.length - 1 ? lastInputRef : null} // Atribui o foco ao último input
                                         />
                                     </div>
-                                    <div style={{ width: "2rem", marginTop: ".70rem" }}>
+                                    <div>
                                         <button style={{ border: "none" }} type="button" className="btn">
                                             <img src="../src/icons/escrever.png" style={{ objectFit: "cover", width: "1.50rem", height: "1.50rem" }} />
                                         </button>
