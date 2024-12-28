@@ -4,7 +4,7 @@ const BodyAppointmentsAdm = () => {
   return (
     <div style={{width: "50rem", marginTop:"3rem"}}>
     
-        <table class="table" style={{width: "50rem"}}>
+        <table class="table" style={{width: "50rem", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
             <thead>
                 <tr>
                 <th scope="col">#</th>

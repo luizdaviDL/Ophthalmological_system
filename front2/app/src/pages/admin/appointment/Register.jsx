@@ -93,7 +93,77 @@ const Register = () => {
                         </div>
                     </div>
                 </div>
+                
             </div>
+
+            <div style={{background: "rgb(235, 238, 238)"}}>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                    <blockquote className="blockquote" style={{ margin: 0 }}>
+                        <p className="mb-0" style={{ margin: 0 }}>Funcionários</p>
+                    </blockquote>
+                </div>
+
+                <div id='clercksList' style={{ display: "flex", justifyContent:"center", height: "10rem", overflowY: "auto"}}>
+                    <div>
+                        <table class="table" style={{width: "48rem", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
+                            <thead>
+                                <tr>
+                                <th  style={{ position: "sticky", top: 0, backgroundColor: "#fff", zIndex: 1 }} scope="col">Id</th>
+                                <th  style={{ position: "sticky", top: 0, backgroundColor: "#fff", zIndex: 1 }} scope="col">Nome</th>
+                                <th  style={{ position: "sticky", top: 0, backgroundColor: "#fff", zIndex: 1 }} scope="col">Departamento</th>
+                                <th  style={{ position: "sticky", top: 0, backgroundColor: "#fff", zIndex: 1 }} scope="col">Cpf</th>                            
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Biantra Amorim ferreira da silva</td>
+                                    <td>Pediatria</td>
+                                    <td>098.045.004-22</td>                               
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Biantra Amorim</td>
+                                    <td>Pediatria</td>
+                                    <td>098.045.004-22</td>                               
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Biantra Amorim</td>
+                                    <td>Pediatria</td>
+                                    <td>098.045.004-22</td>                               
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Biantra Amorim</td>
+                                    <td>Pediatria</td>
+                                    <td>098.045.004-22</td>                               
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Biantra Amorim</td>
+                                    <td>Pediatria</td>
+                                    <td>098.045.004-22</td>                               
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Biantra Amorim</td>
+                                    <td>Pediatria</td>
+                                    <td>098.045.004-22</td>                               
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     );
 };

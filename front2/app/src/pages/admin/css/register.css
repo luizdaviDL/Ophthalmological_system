@@ -1,0 +1,60 @@
+
+/* Estilo para a barra de rolagem */
+#services::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+/* Estilo para o "polegar" (parte que se arrasta) */
+#services::-webkit-scrollbar-thumb {
+    background-color: #969393; /* Cor do polegar */
+    border-radius: 10px; /* Borda arredondada */
+    transition: background-color 0.3s ease;
+}
+
+/* Efeito de hover sobre o polegar */
+#services::-webkit-scrollbar-thumb:hover {
+    background-color: #868686; /* Cor do polegar quando passa o mouse */
+}
+
+/* Estilo para o fundo da barra de rolagem */
+#services::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor de fundo */
+    border-radius: 10px; /* Borda arredondada */
+}
+
+/* Estilo para o canto da barra de rolagem */
+#services::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+/*----------------*/
+
+
+/* Estilo para a barra de rolagem */
+#clercksList::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+/* Estilo para o "polegar" (parte que se arrasta) */
+#clercksList::-webkit-scrollbar-thumb {
+    background-color: #969393; /* Cor do polegar */
+    border-radius: 10px; /* Borda arredondada */
+    transition: background-color 0.3s ease;
+}
+
+/* Efeito de hover sobre o polegar */
+#clercksList::-webkit-scrollbar-thumb:hover {
+    background-color: #868686; /* Cor do polegar quando passa o mouse */
+}
+
+/* Estilo para o fundo da barra de rolagem */
+#clercksList::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor de fundo */
+    border-radius: 10px; /* Borda arredondada */
+}
+
+/* Estilo para o canto da barra de rolagem */
+#clercksList::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
