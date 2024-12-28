@@ -2,7 +2,7 @@ import React from 'react'
 
 const BodyAppointmentsAdm = () => {
   return (
-    <div style={{width: "50rem", marginLeft:"9rem", marginTop:"3rem"}}>
+    <div style={{width: "50rem", marginTop:"3rem"}}>
     
         <table class="table" style={{width: "50rem"}}>
             <thead>

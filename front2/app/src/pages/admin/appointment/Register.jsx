@@ -41,7 +41,7 @@ const Register = () => {
 
     return (
         <div>
-            <div style={{ background: "rgb(255, 255, 255)", width: "50rem", marginLeft: "6rem", marginTop: "5rem", display: "flex", gap: "6rem", justifyContent: "center", paddingTop: "2rem", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
+            <div style={{ background: "rgb(255, 255, 255)", width: "50rem", marginTop: "5rem", display: "flex", gap: "6rem", justifyContent: "center", paddingTop: "2rem", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
                 <div>
                     <div className="mb-3">
                         <label htmlFor="exampleFormControlInput1" className="form-label">Nome</label>

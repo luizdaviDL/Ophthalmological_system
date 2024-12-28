@@ -34,7 +34,7 @@ function TemplatApp({typeUSer}) {
                         <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Opção
                         </button>
-                        <ul className="dropdown-menu">
+                        <ul className="dropdown-menu dropdown-menu-end" style={{ direction: 'rtl' }} >
                             <li><a className="dropdown-item" href="#">Action</a></li>
                             <li><a className="dropdown-item" href="#">Action two</a></li>
                             <li><a className="dropdown-item" href="#">Action three</a></li>
@@ -53,7 +53,7 @@ function TemplatApp({typeUSer}) {
                 </div>
 
                 {/* Usando flex-grow-1 para que este div ocupe o espaço restante */}
-                <div id="bysideBody" className="bg-light flex-grow-1" style={{ overflowY: "auto" }}>
+                <div id="bysideBody" className="bg-light flex-grow-1" style={{ overflowY: "auto", display:"flex", justifyContent:"center" }}>
                     <Outlet />
                 </div>
             </div>
