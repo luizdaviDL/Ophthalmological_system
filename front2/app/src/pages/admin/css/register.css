@@ -58,3 +58,12 @@
     background-color: transparent;
 }
 
+
+.table-header {
+    background: rgb(77, 147, 160);
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
+}
+

@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import Alerts from '../../components/Alerts';
 
-const Register = () => {   
-    const [inputStat, setInputStat] = useState(false);    
+const Register = () => {     
+    const [inputStat, setInputStat] = useState(false); 
+    const [habilitebservation, setHabilitebservation] = useState(false); 
+    const [habiliteTimeDuration, setHabiliteTimeDuration] = useState(false);    
     const [mensageStatus, setMensageStatus] = useState(null);
     const [name, setNome] = useState('');
     const [observation, setObservation] = useState('');
@@ -10,7 +12,10 @@ const Register = () => {
     const [inputs, setInputs] = useState([]); // Estado para armazenar os inputs
     const lastInputRef = useRef(null); // Ref para o último input adicionado
     const [inputCounter, setInputCounter] = useState(0);
+    const [id, setId] = useState(null); 
+    const [stateIdInput, setStateIdInput] = useState('none'); 
 
+    
     const handleName = (e)=>{
         setNome(e.target.value);
     };
@@ -24,6 +29,20 @@ const Register = () => {
     const handleEditName = ()=>{
         setInputStat(false);
     }
+
+    const handleEditObservation = ()=>{
+        setHabilitebservation(false);
+    }
+
+    const handleEditTimeDuration = ()=>{
+        setHabiliteTimeDuration(false);
+    };
+
+    const removeInput = (id) => {
+        // Filtra o array de inputs para remover o input com o id específico
+        const newInputs = inputs.filter(input => input.id !== id);
+        setInputs(newInputs); // Atualiza o estado com os inputs restantes
+    };
 
     // Função para adicionar novos campos de input
     const addInput = () => {
@@ -64,61 +83,95 @@ const Register = () => {
 
     const handleMensageStatus =(typeAlert, text)=>{
         setMensageStatus(<Alerts typeAlert={typeAlert} text={text}/>);
+        
         setTimeout(() => {
             setMensageStatus(null);  // Remove a mensagem de status
-        }, 3000); 
+        }, 3000);  
     }
+
+    const  handleToSaveDatas = async (data, id)=>{        
+        const url =id ? 'http://localhost:8081/appointment/update' : 'http://localhost:8081/appointment';
+        const method = id ? 'PUT': 'POST';
+        try {         
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            const result = await response.json();
+            console.log(result);
+
+            return { status: response.status, result};
+        } catch (error) {        
+            return { status: error.response.status, result: error.response.data };
+        }
+    };
         
 
     const saveData = async () => {
-        const data = {
-            name,
-            observation,
-            timeDuration,
-            services: inputs.map(input => input.value).filter(value => value) // Filtra valores vazios
-        };
-    
-        // Exibe a mensagem antes de fazer a requisição
-        handleMensageStatus("processing", "Enviando os dados");
-    
-        // Aguarda a próxima renderização para garantir que a mensagem apareça
-        setTimeout(async () => {
-            try {
-                const response = await fetch('http://localhost:8081/appointment', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-                const result = await response.json();
-                switch (response.status) {
-                    case 200:
-                    case 201:
-                        handleMensageStatus("success", "Dados Salvos com sucesso");
-                        setInputStat(true);
-                        break;
-                    case 400:
-                        handleMensageStatus("danger",  result.message);
-                        break;
-                    case 401:
-                        handleMensageStatus("danger",  result.message);
-                        break;
-                    case 404:
-                        handleMensageStatus("danger",  result.message);
-                        break;
-                    case 500:
-                        handleMensageStatus("danger",  result.message);
-                        break;
-                    default:
-                        handleMensageStatus("danger", "Erro desconhecido");
-                        break;
+        if (!name || !observation || !timeDuration || inputs.some(input => !input.value)) {
+            handleMensageStatus("danger", "Preencha todos os campos, são obrigatórios.");            
+        }else{
+            const data = {
+                id,
+                name,
+                observation,
+                timeDuration,
+                services: inputs.map(input => input.value).filter(value => value) // Filtra valores vazios
+            };
+        
+            // Exibe a mensagem antes de fazer a requisição
+            handleMensageStatus("processing", "Enviando os dados");
+        
+            // Aguarda a próxima renderização para garantir que a mensagem apareça
+            setTimeout(async () => {
+                try {                   
+                    const {status, result} = await handleToSaveDatas(data, id);
+                    console.log(result)
+                    switch (status) {
+                        case 200:
+                            break
+                        case 201:
+                            if(id){
+                                handleMensageStatus("success", "Dados Atualizados com sucesso");
+                                setInputStat(true);
+                                setHabilitebservation(true);
+                                setHabiliteTimeDuration(true);
+                                setId(result.id);
+                                break;
+                            }
+                            handleMensageStatus("success", "Dados Salvos com sucesso");
+                            setInputStat(true);
+                            setHabilitebservation(true);
+                            setHabiliteTimeDuration(true);
+                            setId(result.id);
+                            setStateIdInput('block');
+                            break
+                        case 400:
+                            handleMensageStatus("danger",  result.message);
+                            break;
+                        case 401:
+                            handleMensageStatus("danger",  result.message);
+                            break;
+                        case 404:
+                            handleMensageStatus("danger",  result.message);
+                            break;
+                        case 500:
+                            handleMensageStatus("danger",  result.message);
+                            break;
+                        default:
+                            handleMensageStatus("danger", "Erro desconhecido");
+                            break;
+                    }
+                                              
+                } catch (error) {
+                    console.error('Erro:', error);
                 }
-                                          
-            } catch (error) {
-                console.error('Erro:', error);
-            }
-        }, 0); // Usa um timeout com 0 ms para garantir que a renderização ocorra primeiro
+            }, 0); // Usa um timeout com 0 ms para garantir que a renderização ocorra primeiro
+        }
+
     };
     
 
@@ -127,9 +180,19 @@ const Register = () => {
     return (
         <div>
             <div style={{display: "flex"}}>
+
+                <div id='alertDiv' style={{width: "13rem", height:"10rem", marginTop:"2rem", display: "flex", justifyContent:"flex-start", position:"absolute", left: "16%"}} >                                                    
+                    {mensageStatus}
+                </div>
+
+
                 <div style={{ background: "rgb(255, 255, 255)"}}>
                     <div style={{background: "rgb(255, 255, 255)", width: "50rem", marginTop: "1rem", display: "flex", gap: "4rem", justifyContent: "center", paddingTop: "2rem", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
                         <div>
+                            <div style={{display: "none"}} id='idCamp'>
+                                <input value={id} style={{ width: "3rem" }} className="form-control" id="exampleFormControlInput1"/>
+                            </div>
+
                             <div style={{display: "flex"}}>
                                 <div className="mb-3">
                                     <label htmlFor="exampleFormControlInput1" className="form-label">Nome</label>
@@ -143,9 +206,9 @@ const Register = () => {
                             <div  style={{display: "flex"}}>
                                 <div className="mb-3">
                                     <label htmlFor="exampleFormControlTextarea1" className="form-label">Observação</label>
-                                    <textarea disabled={inputStat} onChange={handleObservation} style={{ width: "15rem" }} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea disabled={habilitebservation} onChange={handleObservation} style={{ width: "15rem" }} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>  
-                                <button onClick={handleEditName}  style={{ border: "none" }} type="button" className="btn">
+                                <button onClick={handleEditObservation}  style={{ border: "none" }} type="button" className="btn">
                                     <img src="../src/icons/escrever.png" style={{ objectFit: "cover", width: "1.50rem", height: "1.50rem" }} />
                                 </button>
                             </div>
@@ -164,9 +227,9 @@ const Register = () => {
                             <div  style={{display: "flex"}}>
                                 <div className="mb-3">
                                     <label htmlFor="exampleFormControlInput1" className="form-label">Duração Consultas em Minutos</label>
-                                    <input disabled={inputStat} onChange={handletimeDuration} style={{ width: "15rem" }} type="time" className="form-control" id="exampleFormControlInput1" placeholder="clinico geral" />
+                                    <input disabled={habiliteTimeDuration} onChange={handletimeDuration} style={{ width: "15rem" }} type="time" className="form-control" id="exampleFormControlInput1" placeholder="clinico geral" />
                                 </div>
-                                <button onClick={handleEditName}  style={{ border: "none" }} type="button" className="btn">
+                                <button onClick={handleEditTimeDuration}  style={{ border: "none" }} type="button" className="btn">
                                     <img src="../src/icons/escrever.png" style={{ objectFit: "cover", width: "1.50rem", height: "1.50rem" }} />
                                 </button>
                             </div>
@@ -185,7 +248,7 @@ const Register = () => {
                                             <div>
                                                 <input
                                                     id="inputAdd"
-                                                    style={{ width: "20rem" }}
+                                                    style={{ width: "19rem" }}
                                                     type="text"
                                                     className="form-control"
                                                     value={input.value}
@@ -195,9 +258,12 @@ const Register = () => {
                                                     ref={index === inputs.length - 1 ? lastInputRef : null} // Atribui o foco ao último input
                                                 />
                                             </div>
-                                            <div>
+                                            <div style={{display: "flex"}}>
                                                 <button onClick={() => enableEditing(index)} style={{ border: "none" }} type="button" className="btn">
                                                     <img src="../src/icons/escrever.png" style={{ objectFit: "cover", width: "1.50rem", height: "1.50rem" }} />
+                                                </button>
+                                                <button onClick={() => removeInput(input.id)} style={{ border: "none", marginLeft: "-1rem" }} type="button" className="btn">
+                                                    <img src="../src/icons/lixeira.png" style={{ objectFit: "cover", width: "1.50rem", height: "1.50rem" }} />
                                                 </button>
                                             </div>
                                         </div>
@@ -219,10 +285,10 @@ const Register = () => {
                                 <table class="table" style={{width: "48rem", boxShadow: "0 -4px 8px rgba(0, 0, 0, 0.2)"}}>
                                     <thead>
                                         <tr>
-                                            <th  style={{background: "rgb(137, 200, 211)", position: "sticky", top: 0, backgroundColor: "#fff", zIndex: 1 }} scope="col">Id</th>
-                                            <th  style={{background: "rgb(137, 200, 211)", position: "sticky", top: 0, backgroundColor: "#fff", zIndex: 1 }} scope="col">Nome</th>
-                                            <th  style={{background: "rgb(137, 200, 211)", position: "sticky", top: 0, backgroundColor: "#fff", zIndex: 1 }} scope="col">Departamento</th>
-                                            <th  style={{background: "rgb(137, 200, 211)", position: "sticky", top: 0, backgroundColor: "#fff", zIndex: 1 }} scope="col">Cpf</th>                            
+                                            <th className="table-header" scope="col">Id</th>
+                                            <th className="table-header" scope="col">Nome</th>
+                                            <th className="table-header" scope="col">Departamento</th>
+                                            <th className="table-header" scope="col">Cpf</th>                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -300,10 +366,7 @@ const Register = () => {
                                 
                 </div>
 
-                <div id='alertDiv' style={{width: "13rem", height:"10rem", marginTop:"32rem", display: "flex", justifyContent:"flex-end", position:"absolute", left: "83%"}} >
-                                                    
-                    {mensageStatus}
-                </div>
+
 
             </div>
 
